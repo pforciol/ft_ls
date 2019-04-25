@@ -6,20 +6,15 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:42:16 by pforciol          #+#    #+#             */
-/*   Updated: 2019/04/17 12:57:29 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/04/25 17:17:20 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-void	ft_perror(void)
-{
-	perror("Error");
-}
-
 int					main(int argc, char const *argv[])
 {
-	DIR				*dirp;
+	DIR				*dir_ptr;
 	const char		*path;
 	struct dirent	*dir;
 
@@ -27,12 +22,15 @@ int					main(int argc, char const *argv[])
 	path = ".";
 	if (argv[1] != NULL)
 		path = argv[1];
-	if ((dirp = opendir(path)) == NULL)
-		ft_perror();
-	while ((dir = readdir(dirp)) != NULL)
+	if ((dir_ptr = opendir(path)) == NULL)
+		ft_perror(path);
+	else
 	{
-		ft_putendl(dir->d_name);
+		while ((dir = readdir(dir_ptr)) != NULL)
+		{
+			ft_putendl(dir->d_name);
+		}
+		closedir(dir_ptr);
 	}
-	closedir(dirp);
 	return (0);
 }

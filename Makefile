@@ -6,46 +6,46 @@
 #    By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/17 11:47:04 by pforciol          #+#    #+#              #
-#    Updated: 2019/04/17 12:58:26 by pforciol         ###   ########.fr        #
+#    Updated: 2019/04/25 18:38:30 by pforciol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+RED = \033[0;31m
+GREEN = \033[0;32m
+DARK_GREY = \033[0;90m
+NORMAL = \033[0m
 
 NAME = ft_ls
 CC = @gcc
 OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS =		srcs/ft_list_dir.c
+SRCS =		srcs/ft_ls_utils.c \
+			srcs/ft_inspect_file.c \
+			srcs/ft_strmode.c
 
 all: $(NAME)
 
-# Rule to make our libft without going into libft directory
 libftmake:
 	@make -C libft
 
-# Rule to fclean our libft without going into libft directory
 libftfclean:
 	@make -C libft fclean
 
-# Rule to make our "ft_ls" executable
 $(NAME): libftmake $(OBJS)
 	$(CC) -o $(NAME) $(OBJS) -L libft/ -lft &> /dev/null
-	@echo "\033[90mCOMPILATION	 \033[92m>>\033[39m ft_ls has been compiled"
+	@echo "$(DARK_GREY)COMPILATION	 $(GREEN)>>$(NORMAL) ft_ls has been compiled"
 
-# Rule when we want to debug with option -g (to use with gdb / lldb)
 debug: libftmake $(OBJS)
 	$(CC) -g -o $(NAME) $(SRCS) -L libft/ -lft
-	@echo "\033[90mDEBUGGING	 \033[92m>>\033[39m ft_ls has been compiled \033[90m(ready for debug)\033[39m"
+	@echo "$(DARK_GREY)DEBUGGING	 $(GREEN)>>$(NORMAL) ft_ls has been compiled $(DARK_GREY)(ready for debug)$(NORMAL)"
 
-# Rule to clean our directories without removing the "ft_ls" executable
 clean:
 	@rm -f $(OBJS)
-	@echo "\033[90mSUPPRESSION	 \033[91m>>\033[39m ft_ls has been removed \033[90m(object files)\033[39m"
+	@echo "$(DARK_GREY)SUPPRESSION	 $(RED)>>$(NORMAL) ft_ls has been removed $(DARK_GREY)(object files)$(NORMAL)"
 
-# Rule to totally clean our directory
 fclean: clean
 	@rm -f $(NAME)
-	@echo "\033[90mSUPPRESSION	 \033[91m>>\033[39m ft_ls has been removed \033[90m(executables)\033[39m"
+	@echo "$(DARK_GREY)SUPPRESSION	 $(RED)>>$(NORMAL) ft_ls has been removed $(DARK_GREY)(executables)$(NORMAL)"
 
-# Rule to fclean our directory and re-compile right after
 re: fclean all
