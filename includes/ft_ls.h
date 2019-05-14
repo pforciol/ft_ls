@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/04/25 18:33:45 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/14 15:58:55 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@
 # define ERROR -1
 
 void				ft_perror(const char *path);
-void				ft_strmode(mode_t mode, char * buf);
 
 typedef struct		s_file
 {
-	char			*name;
+	const char			*name;
 	char			*type;
 	char			*modes;
 	int				links;

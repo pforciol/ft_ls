@@ -6,7 +6,7 @@
 #    By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/17 11:47:04 by pforciol          #+#    #+#              #
-#    Updated: 2019/04/25 18:38:30 by pforciol         ###   ########.fr        #
+#    Updated: 2019/05/14 14:07:44 by pforciol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,7 @@ OBJS = $(SRCS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS =		srcs/ft_ls_utils.c \
-			srcs/ft_inspect_file.c \
-			srcs/ft_strmode.c
+			srcs/ft_inspect_file.c
 
 all: $(NAME)
 
