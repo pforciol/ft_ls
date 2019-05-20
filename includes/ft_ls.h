@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/14 15:58:55 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/20 11:02:17 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include <stdio.h>
 # include <dirent.h>
 # include <sys/stat.h>
+# include <pwd.h>
+# include <grp.h>
+# include <time.h>
 
 # define ERROR -1
 
@@ -30,7 +33,7 @@ typedef struct		s_file
 	int				links;
 	char			*owner;
 	char			*group;
-	int				size;
+	long long		size;
 	char			*last_edit;
 }					t_file;
 
