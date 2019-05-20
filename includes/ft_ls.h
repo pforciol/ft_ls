@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/20 11:02:17 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/20 14:36:37 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void				ft_perror(const char *path);
 
 typedef struct		s_file
 {
-	const char			*name;
+	const char		*name;
 	char			*type;
 	char			*modes;
 	int				links;
@@ -36,5 +36,15 @@ typedef struct		s_file
 	long long		size;
 	char			*last_edit;
 }					t_file;
+
+typedef struct		s_opt
+{
+	int				R;
+	int				l;
+	int				a;
+	int				r;
+	int				t;
+}					t_opt;
+
 
 #endif
