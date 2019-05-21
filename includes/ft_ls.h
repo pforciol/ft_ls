@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/20 14:36:37 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/21 17:10:48 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,14 @@ typedef struct		s_file
 typedef struct		s_opt
 {
 	int				R;
-	int				l;
 	int				a;
+	int				l;
 	int				r;
 	int				t;
+	int				nb_args;
 }					t_opt;
 
+t_opt				*ft_get_opts(const char *argv[], int argc);
+void				ft_usage(void);
 
 #endif

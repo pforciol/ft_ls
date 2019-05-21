@@ -6,7 +6,7 @@
 #    By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/17 11:47:04 by pforciol          #+#    #+#              #
-#    Updated: 2019/05/20 14:13:12 by pforciol         ###   ########.fr        #
+#    Updated: 2019/05/21 15:17:20 by pforciol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ OBJ_DIR = objs/
 CFLAGS = -Wall -Wextra -Werror
 
 SRC =		ft_ls_utils.c \
-			ft_list_dir.c
+			options.c \
+			main.c
 			
 SRC_DIR = srcs/
 
