@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 15:06:24 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/21 17:22:16 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/22 14:18:57 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ static int			ft_set_opts(const char *arg, t_opt *opt)
 	while (arg[i] != '\0')
 	{
 		ft_valid_opt(arg[i]);
-		opt->R = (arg[i] == 'R' ? 1 : opt->R);
-		opt->a = (arg[i] == 'a' ? 1 : opt->a);
-		opt->l = (arg[i] == 'l' ? 1 : opt->l);
-		opt->r = (arg[i] == 'r' ? 1 : opt->r);
-		opt->t = (arg[i] == 't' ? 1 : opt->t);
+		opt->ur = (arg[i] == 'R' ? 1 : opt->ur);
+		opt->la = (arg[i] == 'a' ? 1 : opt->la);
+		opt->ll = (arg[i] == 'l' ? 1 : opt->ll);
+		opt->lr = (arg[i] == 'r' ? 1 : opt->lr);
+		opt->lt = (arg[i] == 't' ? 1 : opt->lt);
 		i++;
 	}
 	return (1);
@@ -56,28 +56,27 @@ static t_opt		*ft_init_opts(void)
 
 	if (!(opt = malloc(sizeof(t_opt))))
 		exit(ERROR);
-	opt->R = 0;
-	opt->a = 0;
-	opt->l = 0;
-	opt->r = 0;
-	opt->t = 0;
-	opt->nb_args = 0;
+	opt->ur = 0;
+	opt->la = 0;
+	opt->ll = 0;
+	opt->lr = 0;
+	opt->lt = 0;
+	opt->nb_opt = 0;
 	return (opt);
 }
 
 t_opt				*ft_get_opts(const char *argv[], int argc)
 {
 	int				i;
-	int				j;
 	t_opt			*opt;
 
 	opt = ft_init_opts();
 	i = 1;
 	while (i <= argc - 1)
 	{
-		opt->nb_args = i - 1;
 		if (ft_set_opts(argv[i], opt) == 0)
 			return (opt);
+		opt->nb_opt++;
 		i++;
 	}
 	return (opt);

@@ -6,7 +6,7 @@
 #    By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/17 11:47:04 by pforciol          #+#    #+#              #
-#    Updated: 2019/05/21 15:17:20 by pforciol         ###   ########.fr        #
+#    Updated: 2019/05/22 14:38:23 by pforciol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRC =		ft_ls_utils.c \
 			options.c \
-			main.c
+			main.c \
+			sort.c \
+			debug.c
 			
 SRC_DIR = srcs/
 
@@ -38,7 +40,7 @@ INCLUDES = includes/ft_ls.h
 all: $(NAME)
 
 $(NAME): lib $(OBJ)
-	$(CC) -o $(NAME) $(SRC) -L libft/ -lft
+	$(CC) $(CFLAGS) -o $(NAME) $(SRC) -L libft/ -lft
 	@echo "$(DARK_GREY)COMPILATION	 $(GREEN)>>$(NORMAL) ft_ls has been compiled"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INCLUDES) libft/libft.a
@@ -46,7 +48,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INCLUDES) libft/libft.a
 	$(CC) -c $< -o $@
 
 debug: lib $(OBJ)
-	$(CC) -g -o $(NAME) $(SRC) -L libft/ -lft
+	$(CC) -g $(CFLAGS) -o $(NAME) $(SRC) -L libft/ -lft
 	@echo "$(DARK_GREY)COMPILATION	 $(GREEN)>>$(NORMAL) ft_ls has been compiled $(DARK_GREY)(ready for debug)$(NORMAL)"
 
 clean:

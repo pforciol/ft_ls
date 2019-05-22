@@ -1,29 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/20 13:41:06 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/22 14:38:06 by pforciol         ###   ########.fr       */
+/*   Created: 2019/05/22 14:20:46 by pforciol          #+#    #+#             */
+/*   Updated: 2019/05/22 15:15:09 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-int					main(int argc, char const *argv[])
+static void			sort_lexically(t_opt *opt, char *args[], int argc)
 {
-	char			**args;
-	t_opt			*opt;
+	int				i;
+	char			*tmp;
 
-	opt = ft_get_opts(argv, argc);
-	args = NULL;
-	if (!(argc == opt->nb_opt))
+	i = 0;
+	while (args[i] != NULL && i < (argc - 2 - opt->nb_opt))
 	{
-		args = ft_cpynargs(argv, argc, opt);
-		args = ls_sort(opt, args, argc);
+		if (ft_strcmp(args[i], args[i + 1]) > 0)
+		{
+			tmp = args[i];
+			args[i] = args[i + 1];
+			args[i + 1] = tmp;
+			i = -1;
+		}
+		i++;
 	}
-	debug(opt, argc, args);
-	return (0);
+}
+
+char				**ls_sort(t_opt *opt, char *args[], int argc)
+{
+	if (opt->nb_opt == 0)
+		sort_lexically(opt, args, argc);
+	return (args);
 }
