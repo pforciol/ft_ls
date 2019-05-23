@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 14:20:46 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/22 15:41:15 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:55:52 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void			sort_lexically(t_opt *opt, char *args[], int argc, int r)
 		}
 		i++;
 	}
+	args[++i] = "\0";
 }
 
 char				**ls_sort(t_opt *opt, char *args[], int argc)

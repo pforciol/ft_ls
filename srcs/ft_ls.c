@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_ls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/20 13:41:06 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/23 10:21:24 by pforciol         ###   ########.fr       */
+/*   Created: 2019/05/23 10:24:33 by pforciol          #+#    #+#             */
+/*   Updated: 2019/05/23 10:58:26 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-int					main(int argc, char const *argv[])
+int					ft_ls(t_opt *opt, char *args[])
 {
-	char			**args;
-	t_opt			*opt;
+	int				i;
+	struct stat		*p_stat;
 
-	opt = ft_get_opts(argv, argc);
-	args = NULL;
-	if (!(argc == opt->nb_opt + 1))
+	i = 0;
+	while (args[i] != NULL)
 	{
-		args = ft_cpynargs(argv, argc, opt);
-		args = ls_sort(opt, args, argc);
-	}
-	debug(opt, argc, args);
-	return (0);
+		if (stat(args[i], &p_stat) != 0)
+			return (0);
+		return S_ISDIR(statbuf.st_mode);
 }
+
+}
+
+int					ft_is_dir

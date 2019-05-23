@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 17:17:15 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/22 14:06:06 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:55:26 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char				**ft_cpynargs(const char *argv[], int argc, t_opt *opt)
 
 	i = opt->nb_opt + 1;
 	j = 0;
-	if (!(args = (char **)malloc(sizeof(char *) * (argc - 1 - opt->nb_opt))))
+	if (!(args = (char **)malloc(sizeof(char *) * (argc - 1 - opt->nb_opt) + 1)))
 		exit(ERROR);
 	while (argv[i] != NULL && i < argc)
 	{

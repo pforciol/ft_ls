@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:23:01 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/22 14:17:46 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/23 10:12:33 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void			print_args(char *args[], int argc, t_opt *opt)
 		ft_putstr("List of all the args : ");
 		while (args[i] != NULL && i < (argc - 1 - opt->nb_opt))
 		{
-			ft_putstr(ft_strjoin(ft_strjoin("[ ", args[i]), " ]   "));
+			ft_putstr(ft_strjoin(ft_strjoin("[ ", args[i]), " ] "));
 			i++;
 		}
 		ft_putchar('\n');
