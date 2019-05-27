@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls_utils.c                                      :+:      :+:    :+:   */
+/*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/25 17:17:15 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/27 09:38:09 by pforciol         ###   ########.fr       */
+/*   Created: 2019/05/27 09:38:18 by pforciol          #+#    #+#             */
+/*   Updated: 2019/05/27 12:07:17 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-void				ft_perror(const char *path)
+t_list				*ft_getargs(const char *argv[], int argc, t_opt *opt)
 {
-	char			*message;
+	t_data			*data;
+	t_list			*l_args;
+	int				i;
+	int				j;
 
-	message = ft_strjoin("ft_ls: ", path);
-	perror(message);
-	exit(ERROR);
-}
-
-void				ft_usage(void)
-{
-	ft_putendl("usage: ft_ls [-Ralrt] [file ...]");
-	exit(ERROR);
+	l_args = NULL;
+	i = opt->nb_opt + 1;
+	j = 0;
+	while (argv[i] != NULL && i < argc)
+	{
+		data->name = argv[i];
+		lst_append(&l_args, lst_create(data, sizeof(data)));
+		i++;
+		j++;
+	}
+	return (l_args);
 }

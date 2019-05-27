@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:23:01 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/23 10:12:33 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/27 12:16:56 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,30 @@ static void			args_info(t_opt *opt, int argc)
 		ft_putstr("There is no args\n");
 }
 
-static void			print_args(char *args[], int argc, t_opt *opt)
+static void			print_args(t_list *l_args, int argc, t_opt *opt)
 {
 	int				i;
+	t_data			*data;
 
 	i = 0;
 	if (!(argc == opt->nb_opt + 1))
 	{
 		ft_putstr("List of all the args : ");
-		while (args[i] != NULL && i < (argc - 1 - opt->nb_opt))
+		while (l_args->next != NULL && i < (argc - 1 - opt->nb_opt))
 		{
-			ft_putstr(ft_strjoin(ft_strjoin("[ ", args[i]), " ] "));
+			data = NULL;
+			data = l_args->content;
+			ft_putstr(ft_strjoin(ft_strjoin("[ ", data->name), " ] "));
+			l_args = l_args->next;
 			i++;
 		}
 		ft_putchar('\n');
 	}
 }
 
-void				debug(t_opt *opt, int argc, char *args[])
+void				debug(t_opt *opt, int argc, t_list *l_args)
 {
 	see_options(opt);
 	args_info(opt, argc);
-	print_args(args, argc, opt);
+	print_args(l_args, argc, opt);
 }

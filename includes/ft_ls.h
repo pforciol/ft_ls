@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/22 14:38:14 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/27 12:17:26 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,11 @@
 
 void				ft_perror(const char *path);
 
-typedef struct		s_file
+typedef struct		s_data
 {
 	const char		*name;
-	char			*type;
-	char			*modes;
-	int				links;
-	char			*owner;
-	char			*group;
-	long long		size;
-	char			*last_edit;
-}					t_file;
+	int				is_dir;
+}					t_data;
 
 typedef struct		s_opt
 {
@@ -49,10 +43,16 @@ typedef struct		s_opt
 
 t_opt				*ft_get_opts(const char *argv[], int argc);
 void				ft_usage(void);
-char				**ft_cpynargs(const char *argv[], int argc, t_opt *opt);
+t_list				*ft_getargs(const char *argv[], int argc, t_opt *opt);
 char				**ls_sort(t_opt *opt, char *args[], int argc);
 
+//LST_UTILS
+t_list				*lst_create(void *content, size_t size);
+void				lst_append(t_list **list, t_list *to_append);
+void				lst_clear(t_list **list);
+int					get_lst_size(t_list *list);
+
 //DEBUG
-void				debug(t_opt *opt, int argc, char *args[]);
+void				debug(t_opt *opt, int argc, t_list *l_args);
 
 #endif
