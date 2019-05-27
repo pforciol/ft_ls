@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:23:01 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/27 12:16:56 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/27 20:54:08 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,17 @@ static void			args_info(t_opt *opt, int argc)
 static void			print_args(t_list *l_args, int argc, t_opt *opt)
 {
 	int				i;
-	t_data			*data;
+	char			*color;
 
 	i = 0;
+	color = "\033[0m";
 	if (!(argc == opt->nb_opt + 1))
 	{
 		ft_putstr("List of all the args : ");
-		while (l_args->next != NULL && i < (argc - 1 - opt->nb_opt))
+		while (l_args != NULL && i < (argc - 1 - opt->nb_opt))
 		{
-			data = NULL;
-			data = l_args->content;
-			ft_putstr(ft_strjoin(ft_strjoin("[ ", data->name), " ] "));
+			color = ((t_data *)l_args->content)->is_dir == 1 ? "\033[36m" : "\033[0m";
+			ft_putstr(ft_strjoin(color, ft_strjoin(ft_strjoin("[ ", ((t_data *)l_args->content)->name), " ] \033[0m")));
 			l_args = l_args->next;
 			i++;
 		}

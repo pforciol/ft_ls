@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/27 12:17:26 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/27 18:39:09 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # include <time.h>
 
 # define ERROR -1
-
-void				ft_perror(const char *path);
 
 typedef struct		s_data
 {
@@ -43,8 +41,10 @@ typedef struct		s_opt
 
 t_opt				*ft_get_opts(const char *argv[], int argc);
 void				ft_usage(void);
-t_list				*ft_getargs(const char *argv[], int argc, t_opt *opt);
-char				**ls_sort(t_opt *opt, char *args[], int argc);
+t_list				*ft_getargs(const char *args[], int argc, t_opt *opt);
+t_list				*ls_sort(t_opt *opt, t_list *l_args, int argc);
+
+void				ft_perror(const char *path, int do_exit);
 
 //LST_UTILS
 t_list				*lst_create(void *content, size_t size);

@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 13:41:06 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/27 12:17:01 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/27 20:55:41 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int					main(int argc, char const *argv[])
 	if (!(argc == opt->nb_opt + 1))
 	{
 		l_args = ft_getargs(argv, argc, opt);
-		//l_args = ls_sort(opt, l_args, argc);
+		l_args = ls_sort(opt, l_args, argc);
 	}
 	debug(opt, argc, l_args);
 	return (0);
