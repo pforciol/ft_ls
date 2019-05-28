@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 09:38:18 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/27 18:27:10 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/28 16:21:53 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,18 @@ static t_data			*ft_getdata(t_data *data, char *path)
 	return(data);
 }
 
-t_list				*ft_getargs(const char *args[], int argc, t_opt *opt)
+t_list				*ft_getarg(char *arg, t_list *l_args, t_opt *opt)
 {
 	t_data			*data;
-	t_list			*l_args;
-	int				i;
+	DIR				*dir;
 
-	l_args = NULL;
-	i = opt->nb_opt + 1;
-	while (args[i] != NULL && i < argc)
+	data = NULL;
+	if ((data = ft_getdata(data, arg)) != NULL)
 	{
-		data = NULL;
-		if ((data = ft_getdata(data, (char *)args[i])) != NULL)
-			lst_append(&l_args, lst_create(data, sizeof(data)));
-		i++;
-	}
+		lst_append(&l_args, lst_create(data, sizeof(data)));
+		if (opt->ur == 1 && data->is_dir == 1)
+		{
+			dir = opendir(data->name);
+			//TODO : OPENDIR, LIST DIR INTO char**, add them to list
 	return (l_args);
 }

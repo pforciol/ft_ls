@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/27 18:39:09 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/28 15:07:18 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ typedef struct		s_opt
 	int				nb_opt;
 }					t_opt;
 
-t_opt				*ft_get_opts(const char *argv[], int argc);
+t_opt				*ft_get_opts(char *argv[], int argc);
 void				ft_usage(void);
-t_list				*ft_getargs(const char *args[], int argc, t_opt *opt);
+t_list				*ft_getarg(char *arg, t_list *l_args, t_opt *opt);
 t_list				*ls_sort(t_opt *opt, t_list *l_args, int argc);
 
 void				ft_perror(const char *path, int do_exit);

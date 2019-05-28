@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 15:06:24 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/22 14:18:57 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/28 14:45:09 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void			ft_valid_opt(char c)
 	}
 }
 
-static int			ft_set_opts(const char *arg, t_opt *opt)
+static int			ft_set_opts(char *arg, t_opt *opt)
 {
 	int				i;
 	int				len;
@@ -65,7 +65,7 @@ static t_opt		*ft_init_opts(void)
 	return (opt);
 }
 
-t_opt				*ft_get_opts(const char *argv[], int argc)
+t_opt				*ft_get_opts(char *argv[], int argc)
 {
 	int				i;
 	t_opt			*opt;

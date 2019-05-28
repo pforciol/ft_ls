@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:23:01 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/27 20:54:08 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/28 15:06:51 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ static void			args_info(t_opt *opt, int argc)
 		ft_putnbr(argc - 1 - opt->nb_opt);
 		ft_putchar('\n');
 	}
-	else
-		ft_putstr("There is no args\n");
+	else if (argc == opt->nb_opt + 1)
+		ft_putstr("No args specified, \".\" path set\n");
 }
 
 static void			print_args(t_list *l_args, int argc, t_opt *opt)

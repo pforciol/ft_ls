@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 14:20:46 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/27 20:38:21 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/28 14:50:17 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void			sort_lexically(t_opt *opt, t_list *l_args, int argc, int r)
 
 	i = 0;
 	start = l_args;
-	while (l_args->next != NULL && i < (argc - 2 - opt->nb_opt))
+	while (l_args != NULL && l_args->next != NULL && i < (argc - 2 - opt->nb_opt))
 	{
 		first = (char *)((t_data *)l_args->content)->name;
 		second = (char *)((t_data *)l_args->next->content)->name;
