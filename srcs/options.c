@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 15:06:24 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/28 14:45:09 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/29 10:54:09 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 static void			ft_valid_opt(char c)
 {
-	char			*options;
-
-	options = "Ralrt";
-	if (ft_strchr(options, (int)c) == NULL || c == '\0')
+	if (ft_strchr("Ralrt", (int)c) == NULL || c == '\0')
 	{
 		ft_putstr("ft_ls: illegal option -- ");
 		ft_putchar(c);

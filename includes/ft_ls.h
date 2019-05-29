@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/28 15:07:18 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/05/29 12:16:49 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdio.h>
 # include <dirent.h>
 # include <sys/stat.h>
+# include <sys/types.h>
 # include <pwd.h>
 # include <grp.h>
 # include <time.h>
@@ -25,8 +26,17 @@
 
 typedef struct		s_data
 {
-	const char		*name;
-	int				is_dir;
+	char			*name;
+	char			*path;
+	mode_t			mode;
+	nlink_t			n_link;	
+	uid_t			uid;
+	gid_t			gid;
+	off_t			size;
+	dev_t			rdev;
+	time_t			time;
+	long			ntime;
+	quad_t			blocks;
 }					t_data;
 
 typedef struct		s_opt
