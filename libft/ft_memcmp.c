@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 10:40:04 by pforciol          #+#    #+#             */
-/*   Updated: 2018/11/10 17:53:04 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/10 14:00:03 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n)
 	i = 0;
 	while (i < n)
 	{
-		if (s12[i] != s22[i] || s12 == '\0' || s22 == '\0')
+		if (s12[i] != s22[i] || s12[i] == '\0' || s22[i] == '\0')
 			return (s12[i] - s22[i]);
 		i++;
 	}

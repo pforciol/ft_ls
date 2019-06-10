@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/09 09:16:19 by pforciol          #+#    #+#             */
-/*   Updated: 2018/11/15 15:07:59 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/10 13:59:55 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t		i;
-
-	i = 0;
 	if (src > dst)
 	{
 		ft_memcpy(dst, src, len);
