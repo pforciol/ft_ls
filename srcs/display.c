@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.c                                            :+:      :+:    :+:   */
+/*   display.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/23 10:24:33 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/23 10:58:26 by pforciol         ###   ########.fr       */
+/*   Created: 2019/06/11 09:35:16 by pforciol          #+#    #+#             */
+/*   Updated: 2019/06/11 10:09:35 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-int					ft_ls(t_opt *opt, char *args[])
+int					ls_display(t_list *begin, t_opt opt, int first, int n)
 {
-	int				i;
-	struct stat		*p_stat;
+	t_list			*l_args;
+	t_data			*file;
 
-	i = 0;
-	while (args[i] != NULL)
+	l_args = begin;
+	file = NULL;
+	if (opt.ur == 0 && first == 0)
+		return (SUCCESS);
+	while (l_args)
 	{
-		if (stat(args[i], &p_stat) != 0)
-			return (0);
-		return S_ISDIR(statbuf.st_mode);
+		file = l_args->content;
+		if (S_ISDIR(file->mode) && (first == 1 || (ft_strcmp(file->name, ".")
+				&& ft_strcmp(file->name))))
+	}
 }
-
-}
-
-int					ft_is_dir
