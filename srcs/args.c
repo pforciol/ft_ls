@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 09:38:18 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/29 13:03:54 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/12 12:28:44 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_data		*ft_getdata(t_data *data, char *path, struct stat *p_stat)
 {
-	if(!(data = malloc(sizeof(t_data))))
+	if (!(data = malloc(sizeof(t_data))))
 		exit(ERROR);
 	data->name = path;
 	data->mode = p_stat->st_mode;
@@ -26,14 +26,13 @@ static t_data		*ft_getdata(t_data *data, char *path, struct stat *p_stat)
 	data->time = p_stat->st_mtimespec.tv_sec;
 	data->ntime = p_stat->st_mtimespec.tv_nsec;
 	data->blocks = p_stat->st_blocks;
-	return(data);
+	return (data);
 }
 
 t_list				*ft_getarg(char *arg, t_list *l_args, t_opt *opt)
 {
 	t_data			*data;
 	struct stat		p_stat;
-	//DIR				*dir;
 
 	(void)opt;
 	data = NULL;
@@ -41,6 +40,5 @@ t_list				*ft_getarg(char *arg, t_list *l_args, t_opt *opt)
 		ft_perror(arg, 0);
 	else if ((data = ft_getdata(data, arg, &p_stat)) != NULL)
 		lst_append(&l_args, lst_create(data, sizeof(data)));
-			//TODO : OPENDIR, LIST DIR INTO char**, add them to list
 	return (l_args);
 }

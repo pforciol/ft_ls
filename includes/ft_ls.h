@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/29 12:16:49 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/12 12:59:18 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <sys/types.h>
 # include <pwd.h>
 # include <grp.h>
-# include <time.h>
 
 # define ERROR -1
 
@@ -52,7 +51,7 @@ typedef struct		s_opt
 t_opt				*ft_get_opts(char *argv[], int argc);
 void				ft_usage(void);
 t_list				*ft_getarg(char *arg, t_list *l_args, t_opt *opt);
-t_list				*ls_sort(t_opt *opt, t_list *l_args, int argc);
+t_list				*ls_sort(t_opt *opt, t_list *l_args, int ac);
 
 void				ft_perror(const char *path, int do_exit);
 

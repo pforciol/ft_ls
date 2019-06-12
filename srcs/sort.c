@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 14:20:46 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/12 12:25:11 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/12 12:59:14 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int			sort_by_time(t_opt *opt, t_data *first, t_data *second)
 	return (0);
 }
 
-t_list				*ls_sort(t_opt *opt, t_list *l_args, int argc)
+t_list				*ls_sort(t_opt *opt, t_list *l_args, int ac)
 {
 	int				i;
 	t_list			*start;
@@ -56,7 +56,7 @@ t_list				*ls_sort(t_opt *opt, t_list *l_args, int argc)
 
 	i = 0;
 	start = l_args;
-	while (l_args != NULL && l_args->next != NULL && i < (argc - 2 - opt->nb_opt))
+	while (l_args != NULL && l_args->next != NULL && i < (ac - 2 - opt->nb_opt))
 	{
 		first = ((t_data *)l_args->content);
 		second = ((t_data *)l_args->next->content);
