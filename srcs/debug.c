@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:23:01 by pforciol          #+#    #+#             */
-/*   Updated: 2019/05/29 13:04:35 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/12 10:25:05 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,29 +45,26 @@ static void			args_info(t_opt *opt, int argc)
 		ft_putstr("No args specified, \".\" path set\n");
 }
 
-static void			print_args(t_list *l_args, int argc, t_opt *opt)
+static void			print_args(t_list *l_args)
 {
 	int				i;
 	char			*color;
 
 	i = 0;
 	color = "\033[0m";
-	if (!(argc == opt->nb_opt + 1))
+	ft_putstr("List of all the args : ");
+	while (l_args != NULL)
 	{
-		ft_putstr("List of all the args : ");
-		while (l_args != NULL && i < (argc - 1 - opt->nb_opt))
-		{
-			ft_putstr(ft_strjoin(ft_strjoin("[ ", ((t_data *)l_args->content)->name), " ] \033[0m"));
-			l_args = l_args->next;
-			i++;
-		}
-		ft_putchar('\n');
+		ft_putstr(ft_strjoin(ft_strjoin("[ ", ((t_data *)l_args->content)->name), " ] \033[0m"));
+		l_args = l_args->next;
+		i++;
 	}
+	ft_putchar('\n');
 }
 
 void				debug(t_opt *opt, int argc, t_list *l_args)
 {
 	see_options(opt);
 	args_info(opt, argc);
-	print_args(l_args, argc, opt);
+	print_args(l_args);
 }
