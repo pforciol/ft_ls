@@ -6,7 +6,7 @@
 #    By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/17 11:47:04 by pforciol          #+#    #+#              #
-#    Updated: 2019/05/27 12:18:06 by pforciol         ###   ########.fr        #
+#    Updated: 2019/06/17 13:19:47 by pforciol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,13 @@ OBJ_DIR = objs/
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRC =		ft_ls_utils.c \
-			options.c \
-			main.c \
-			sort.c \
-			args.c \
-			lst_utils.c \
+SRC =		ft_ls.c \
+			ls_args_utils.c \
+			ls_lst_utils.c \
+			ls_options.c \
+			ls_process.c \
+			ls_sort.c \
+			ls_utils.c \
 			debug.c
 			
 SRC_DIR = srcs/

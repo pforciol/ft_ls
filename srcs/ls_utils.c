@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 17:17:15 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/17 15:04:23 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/17 16:46:53 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,32 @@ void				ls_get_columns_widths(t_list *l_args, unsigned int *widths)
 		widths[6] = S_ISBLK(tmp->mode) || S_ISCHR(tmp->mode) ? 1 : 0;
 		l_args = l_args->next;	
 	}
+}
+
+t_list				*ls_append_parent(t_list *parent, t_list *l_args)
+{
+	char			*parent_path;
+	char			*parent_name;
+	char			*name;
+
+	parent_path = NULL;
+	if (parent)
+		parent_name = ft_strdup(((t_data *)parent->content)->name);
+	name = ft_strdup(((t_data *)l_args->content)->name);
+	if (parent && (!ft_strequ(parent_name, name)))
+	{
+		parent_path = ft_strjoin(parent_name, name);
+		name = ft_strjoin(parent_path, "/");
+	}
+	else
+		name = ft_strjoin(name, "/");
+	free(((t_data *)l_args->content)->name);
+	((t_data *)l_args->content)->name = name;
+	if (parent)
+		free(parent_name);
+	free(parent_path);
+	return (l_args);
+	
 }
 
 void				ls_perror(const char *path, int do_exit)

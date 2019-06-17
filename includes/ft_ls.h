@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/17 15:08:18 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/17 16:36:53 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ t_list				*ls_lst_sort(t_opt *opt, t_list *l_args, int ac);
 
 void				ls_process(t_list *l_args, t_opt *opt, int list_len);
 void				ls_get_columns_widths(t_list *l_args, unsigned int *widths);
+t_list				*ls_append_parent(t_list *parent, t_list *l_args);
+
 
 
 void				ls_perror(const char *path, int do_exit);
