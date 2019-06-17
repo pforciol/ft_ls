@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/12 12:59:18 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:08:18 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include <grp.h>
 
 # define ERROR -1
+# define MAX(A, B) (((A) > (B)) ? (A) : (B))
+# define MIN(A, B) (((A) < (B)) ? (A) : (B))
 
 typedef struct		s_data
 {
@@ -29,8 +31,8 @@ typedef struct		s_data
 	char			*path;
 	mode_t			mode;
 	nlink_t			n_link;	
-	uid_t			uid;
-	gid_t			gid;
+	struct passwd	uid;
+	struct group	gid;
 	off_t			size;
 	dev_t			rdev;
 	time_t			time;
@@ -40,20 +42,24 @@ typedef struct		s_data
 
 typedef struct		s_opt
 {
-	int				ur;
-	int				la;
-	int				ll;
-	int				lr;
-	int				lt;
+	int				rr;
+	int				a;
+	int				l;
+	int				r;
+	int				t;
 	int				nb_opt;
 }					t_opt;
 
-t_opt				*ft_get_opts(char *argv[], int argc);
-void				ft_usage(void);
-t_list				*ft_getarg(char *arg, t_list *l_args, t_opt *opt);
-t_list				*ls_sort(t_opt *opt, t_list *l_args, int ac);
+t_opt				*ls_get_opts(char *argv[], int argc);
+void				ls_usage(void);
+t_list				*ls_getarg(char *arg, t_list *l_args, t_opt *opt, int *v_a);
+t_list				*ls_lst_sort(t_opt *opt, t_list *l_args, int ac);
 
-void				ft_perror(const char *path, int do_exit);
+void				ls_process(t_list *l_args, t_opt *opt, int list_len);
+void				ls_get_columns_widths(t_list *l_args, unsigned int *widths);
+
+
+void				ls_perror(const char *path, int do_exit);
 
 //LST_UTILS
 t_list				*lst_create(void *content, size_t size);

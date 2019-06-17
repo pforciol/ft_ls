@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:23:01 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/12 10:25:05 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/17 15:08:57 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 static void			see_options(t_opt *opt)
 {
 	ft_putstr("Enabled options : ");
-	if (opt->ur == 1)
+	if (opt->rr == 1)
 		ft_putchar('R');
-	if (opt->la == 1)
+	if (opt->a == 1)
 		ft_putchar('a');
-	if (opt->ll == 1)
+	if (opt->l == 1)
 		ft_putchar('l');
-	if (opt->lr == 1)
+	if (opt->r == 1)
 		ft_putchar('r');
-	if (opt->lt == 1)
+	if (opt->t == 1)
 		ft_putchar('t');
-	if (opt->ur == 0 && opt->la == 0 && opt->ll == 0 && opt->lr == 0 && opt->lt == 0)
+	if (opt->rr == 0 && opt->a == 0 && opt->l == 0 && opt->r == 0 && opt->t == 0)
 		ft_putstr("no options");
 	ft_putchar('\n');
 }
