@@ -6,11 +6,24 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:55:26 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/19 12:30:00 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/19 14:25:40 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+
+// static t_list			*ls_getfile(char *arg, t_list *l_args)
+// {
+// 	t_data			*data;
+
+// 	if(!(data = (t_data *)malloc(sizeof(t_data))))
+// 		exit(ERROR);
+// 	lstat(arg, &data->stats
+// 	data->name = ft_strdup(arg);
+// 	lst_append(&l_args, lst_create(data, sizeof(t_data)));
+// 	return (l_args);
+// }
+
 
 static t_list		*ls_readdir(DIR *dir, t_list *l_args, t_opt *opt)
 {
@@ -19,10 +32,8 @@ static t_list		*ls_readdir(DIR *dir, t_list *l_args, t_opt *opt)
 	t_list			*entries;
 
 	entries = NULL;
-	if (!(entry = (t_data *)malloc(sizeof(t_data))))
-		exit(ERROR);
-	file = readdir(dir);
-	while (file)
+	entry = NULL;
+	while ((file = readdir(dir)))
 	{
 		if (opt->a || file->d_name[0] != '.')
 		{
@@ -33,7 +44,6 @@ static t_list		*ls_readdir(DIR *dir, t_list *l_args, t_opt *opt)
 		}
 		file = readdir(dir);
 	}
-	free(entry);
 	return(entries);
 }
 
