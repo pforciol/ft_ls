@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 14:20:46 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/17 15:10:07 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/19 10:21:06 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,32 +31,30 @@ static int			ls_sort_lexically(t_opt *opt, t_data *first, t_data *second)
 
 static int			ls_sort_by_time(t_opt *opt, t_data *first, t_data *second)
 {
-	if (first->time == second->time)
+	if (first->stats.st_mtimespec.tv_sec == second->stats.st_mtimespec.tv_sec)
 	{
-		if (first->ntime == second->ntime)
+		if (first->stats.st_mtimespec.tv_nsec == second->stats.st_mtimespec.tv_nsec)
 			return (ls_sort_lexically(opt, first, second));
 		if (opt->r == 1)
-			return (first->ntime > second->ntime);
+			return (first->stats.st_mtimespec.tv_nsec > second->stats.st_mtimespec.tv_nsec);
 		else
-			return (first->ntime < second->ntime);
+			return (first->stats.st_mtimespec.tv_nsec < second->stats.st_mtimespec.tv_nsec);
 	}
 	if (opt->r == 1)
-		return (first->time > second->time);
+		return (first->stats.st_mtimespec.tv_sec > second->stats.st_mtimespec.tv_sec);
 	else
-		return (first->time < second->time);
+		return (first->stats.st_mtimespec.tv_sec < second->stats.st_mtimespec.tv_sec);
 	return (0);
 }
 
-t_list				*ls_lst_sort(t_opt *opt, t_list *l_args, int ac)
+t_list				*ls_lst_sort(t_opt *opt, t_list *l_args)
 {
-	int				i;
 	t_list			*start;
 	t_data			*first;
 	t_data			*second;
 
-	i = 0;
 	start = l_args;
-	while (l_args != NULL && l_args->next != NULL && i < (ac - 2 - opt->nb_opt))
+	while (l_args != NULL && l_args->next != NULL)
 	{
 		first = ((t_data *)l_args->content);
 		second = ((t_data *)l_args->next->content);
@@ -65,13 +63,10 @@ t_list				*ls_lst_sort(t_opt *opt, t_list *l_args, int ac)
 		{
 			ls_swap(l_args, l_args->next);
 			l_args = start;
-			i = 0;
 		}
 		else
-		{
 			l_args = l_args->next;
-			i++;
-		}
+
 	}
 	return (start);
 }

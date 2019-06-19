@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 09:26:10 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/17 13:17:30 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/19 10:31:41 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,15 @@ static t_list		*ls_init_list(int argc, char *argv[], t_opt *opt)
 		i = opt->nb_opt + 1;
 		while (argv[i] != NULL && i < argc)
 		{
-			l_args = ls_getarg(argv[i], l_args, opt, &valid_args);
+			l_args = ls_getarg(argv[i], l_args, &valid_args);
 			i++;
 		}
-		l_args = ls_lst_sort(opt, l_args, argc);
+		if (argc > 1)
+			l_args = ls_lst_sort(opt, l_args);
 	}
 	if (valid_args == 0)
 	{
-		l_args = ls_getarg(".", l_args, opt, &valid_args);
+		l_args = ls_getarg(".", l_args, &valid_args);
 	}
 	return (l_args);
 }
