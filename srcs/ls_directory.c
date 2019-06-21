@@ -6,43 +6,40 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:55:26 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/19 14:25:40 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/21 15:53:13 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-// static t_list			*ls_getfile(char *arg, t_list *l_args)
-// {
-// 	t_data			*data;
+t_list				*ls_getfile(char *parent_name, char *name, t_list *l_args)
+{
+	t_data			*data;
+	char			*full_name;
 
-// 	if(!(data = (t_data *)malloc(sizeof(t_data))))
-// 		exit(ERROR);
-// 	lstat(arg, &data->stats
-// 	data->name = ft_strdup(arg);
-// 	lst_append(&l_args, lst_create(data, sizeof(t_data)));
-// 	return (l_args);
-// }
-
+	full_name = ft_strjoin(parent_name, name);
+	if(!(data = (t_data *)malloc(sizeof(t_data))))
+		exit(ERROR);
+	lstat(full_name, &data->stats);
+	if (data != NULL)
+	{
+		data->name = ft_strdup(name);
+		lst_append(&l_args, lst_create(data, sizeof(t_data)));
+	}
+	return (l_args);
+}
 
 static t_list		*ls_readdir(DIR *dir, t_list *l_args, t_opt *opt)
 {
 	struct dirent	*file;
-	t_data			*entry;
 	t_list			*entries;
 
 	entries = NULL;
-	entry = NULL;
 	while ((file = readdir(dir)))
 	{
 		if (opt->a || file->d_name[0] != '.')
-		{
-			entry->name = ft_strdup(file->d_name);
-			lstat(ft_strjoin(((t_data *)l_args->content)->name, file->d_name),
-									&entry->stats);
-			lst_append(&entries, lst_create(entry, sizeof(t_data)));
-		}
-		file = readdir(dir);
+			entries = ls_getfile(((t_data *)l_args->content)->name, 
+									file->d_name, entries);
 	}
 	return(entries);
 }

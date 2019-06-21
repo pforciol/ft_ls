@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 14:20:46 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/19 13:44:52 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/21 15:48:36 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,13 @@ t_list				*ls_lst_sort(t_opt *opt, t_list *l_args)
 		first = ((t_data *)l_args->content);
 		second = ((t_data *)l_args->next->content);
 		if ((opt->t == 0 && ls_sort_lexically(opt, first, second) > 0)
-				|| (opt->t > 0 && ls_sort_by_time(opt, first, second) > 0))
+			|| (opt->t > 0 && ls_sort_by_time(opt, first, second) > 0))
 		{
 			ls_swap(l_args, l_args->next);
 			l_args = start;
 		}
 		else
 			l_args = l_args->next;
-
 	}
 	return (start);
 }

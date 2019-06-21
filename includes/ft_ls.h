@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/19 10:29:07 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/21 14:16:39 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct		s_opt
 
 /* ARGS UTILS */
 t_list				*ls_getarg(char *arg, t_list *l_args, int *v_a);
+t_list				*ls_getfile(char *parent_name, char *name, t_list *l_args);
+
 
 /* DIRECTORY */
 t_list				*ls_opendir(t_list *parent, t_list *l_args, t_opt *opt);

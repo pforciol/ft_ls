@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 10:36:17 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/19 14:21:01 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/20 09:07:23 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,11 @@
 t_list				*lst_create(void *content, size_t size)
 {
 	t_list			*list;
-	void			*list_content;
 
-	if (!(list = (t_list *)malloc(sizeof(t_list))))
+ 	if (!(list = (t_list *)malloc(sizeof(t_list))))
 		exit(ERROR);
-	if (!(list_content = (void *)malloc(size)))
-		exit(ERROR);
-	if (list == NULL)
-		return (NULL);
-	if (content == NULL)
-	{
-		list->content = NULL;
-		list->content_size = 0;
-	}
-	else
-	{
-		ft_memcpy(list_content, content, size);
-		list->content = list_content;
-		list->content_size = size;
-	}
+	list->content = content;
+	list->content_size = size;
 	list->next = NULL;
 	return (list);
 }
