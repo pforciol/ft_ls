@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/21 14:16:39 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/27 10:13:56 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct		s_data
 {
 	char			*name;
 	char			*path;
+	int				is_dir;
 	struct stat		stats;
 }					t_data;
 
@@ -63,14 +64,14 @@ int					get_lst_size(t_list *list);
 t_opt				*ls_get_opts(char *argv[], int argc);
 
 /* PROCESS */
-void				ls_process(t_list *l_args, t_opt *opt, int list_len);
+void				ls_process(t_list *l_args, t_opt *opt, int lst_len, int ac);
 
 /* SORT */
 t_list				*ls_lst_sort(t_opt *opt, t_list *l_args);
 
 /* UTILS */
 void				ls_get_columns_widths(t_list *l_args, unsigned int *w);
-t_list				*ls_append_parent(t_list *parent, t_list *l_args);
+t_list				*ls_set_parent(t_list *parent, t_list *l_args);
 void				ls_perror(const char *path, int do_exit);
 void				ls_usage(void);
 

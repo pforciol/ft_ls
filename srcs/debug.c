@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:23:01 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/19 09:51:42 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/25 12:58:26 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void			print_args(t_list *l_args)
 
 void				debug(t_opt *opt, int argc, t_list *l_args)
 {
+	ft_putendl("\n\n");
 	see_options(opt);
 	args_info(opt, argc);
 	print_args(l_args);

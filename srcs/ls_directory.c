@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:55:26 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/21 15:53:13 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/25 13:58:33 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_list				*ls_opendir(t_list *parent, t_list *l_args, t_opt *opt)
 
 	entries = NULL;
 	name = ft_strdup(((t_data *)l_args->content)->name);
-	l_args = ls_append_parent(parent, l_args);
+	l_args = ls_set_parent(parent, l_args);
 	dir = opendir(((t_data *)l_args->content)->name);
 	if (!dir)
 	{

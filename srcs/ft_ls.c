@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 09:26:10 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/21 12:30:45 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/25 13:49:18 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_list		*ls_init_list(int argc, char *argv[], t_opt *opt)
 		if (argc > 2)
 			l_args = ls_lst_sort(opt, l_args);
 	}
-	if (valid_args == 0)
+	if (valid_args == 0 && argc <= 1)
 	{
 		l_args = ls_getarg(".", l_args, &valid_args);
 	}
@@ -47,7 +47,7 @@ int					main(int argc, char *argv[])
 	opt = ls_get_opts(argv, argc);
 	l_args = ls_init_list(argc, argv, opt);
 	list_len = get_lst_size(l_args);
-	ls_process(l_args, opt, list_len);
+	ls_process(l_args, opt, list_len, argc);
 	debug(opt, argc, l_args);
 	return (0);
 }

@@ -6,11 +6,12 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 17:17:15 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/19 09:19:13 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/25 15:41:10 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+#include "stdio.h"
 
 void				ls_get_columns_widths(t_list *l_args, unsigned int *w)
 {
@@ -32,13 +33,15 @@ void				ls_get_columns_widths(t_list *l_args, unsigned int *w)
 	}
 }
 
-t_list				*ls_append_parent(t_list *parent, t_list *l_args)
+t_list				*ls_set_parent(t_list *parent, t_list *l_args)
 {
-	char			*parent_path;
-	char			*parent_name;
-	char			*name;
+	char		*parent_path;
+	char		*parent_name;
+	char		*name;
+	char		*short_name;
 
 	parent_path = NULL;
+	short_name = NULL;
 	if (parent)
 		parent_name = ft_strdup(((t_data *)parent->content)->name);
 	name = ft_strdup(((t_data *)l_args->content)->name);
@@ -49,13 +52,17 @@ t_list				*ls_append_parent(t_list *parent, t_list *l_args)
 	}
 	else
 		name = ft_strjoin(name, "/");
+	short_name = malloc(sizeof(char) * (ft_strlen(name)));
+	short_name = ft_strncpy(short_name, name, ft_strlen(name) - 1);
+	if (parent && !ft_strequ("./", name))
+	 	ft_putendl(ft_strjoin(ft_strjoin("\n", short_name), ":"));
 	free(((t_data *)l_args->content)->name);
 	((t_data *)l_args->content)->name = name;
 	if (parent)
 		free(parent_name);
 	free(parent_path);
-	return (l_args);
-	
+	free(short_name);
+	return (l_args);	
 }
 
 void				ls_perror(const char *path, int do_exit)

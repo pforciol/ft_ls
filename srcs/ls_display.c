@@ -6,11 +6,24 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:26:06 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/21 15:53:28 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/25 12:07:35 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+
+void				ls_print_recursively(t_list *d_entries, t_list *l_args,
+											t_opt *opt)
+{
+	while (d_entries)
+	{
+		if (S_ISDIR(((t_data *)d_entries->content)->stats.st_mode) &&
+				!ft_strequ(((t_data *)d_entries->content)->name, ".") &&
+				!ft_strequ(((t_data *)d_entries->content)->name, ".."))
+			ls_print_dir(l_args, d_entries, opt);
+		d_entries = d_entries->next;
+	}
+}
 
 void				ls_print_dir(t_list *parent, t_list *l_args, t_opt *opt)
 {
@@ -37,8 +50,5 @@ void				ls_print_dir(t_list *parent, t_list *l_args, t_opt *opt)
 	}
 	d_entries = tmp;
 	if (opt->rr)
-		ft_putendl("NEED TO DO -R");
-		//DO -R
-
-		//TODO: HERE
+		ls_print_recursively(d_entries, l_args, opt);
 }
