@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:26:06 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/25 12:07:35 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/27 19:56:31 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void				ls_print_dir(t_list *parent, t_list *l_args, t_opt *opt)
 	while (d_entries)
 	{
 		if (opt->l)
-			ft_putendl(ft_strjoin("Print -l of ", ((t_data *)d_entries->content)->name));
-			//ls_print_l((t_data *)d_entries->content, (t_data *)l_args->content, widths);
+			//ft_putendl(ft_strjoin("Print -l of ", ((t_data *)d_entries->content)->name));
+			ls_print_l((t_data *)d_entries->content, (t_data *)l_args->content, widths);
 		else
 			ft_putendl(((t_data *)d_entries->content)->name);
 		d_entries = d_entries->next;

@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 17:17:15 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/25 15:41:10 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/27 19:58:35 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,17 @@ void				ls_usage(void)
 {
 	ft_putendl("usage: ft_ls [-Ralrt] [file ...]");
 	exit(ERROR);
+}
+
+void				ls_add_spaces(int width, int len)
+{
+	int				i;
+
+	i = 0;
+	while (i + len < width)
+	{
+		ft_putchar(' ');
+		i++;
+	}
+	ft_putstr("  ");
 }

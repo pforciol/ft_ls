@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 11:01:08 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/27 11:31:43 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/27 19:56:19 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void				ls_process(t_list *l_args, t_opt *opt, int lst_len, int ac)
 		else
 		{
 			if (opt->l)
-				ft_putendl(ft_strjoin("Print -l of ", ((t_data *)l_args->content)->name));
-				//ls_print_l((t_data *)l_args->content, NULL, widths);
+				//ft_putendl(ft_strjoin("Print -l of ", ((t_data *)l_args->content)->name));
+				ls_print_l((t_data *)l_args->content, NULL, widths);
 			else
 				ft_putendl(((t_data *)l_args->content)->name);
 			before = l_args;
@@ -56,4 +56,3 @@ void				ls_process(t_list *l_args, t_opt *opt, int lst_len, int ac)
 		l_args = l_args->next;
 	}
 }
-

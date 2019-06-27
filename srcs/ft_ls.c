@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 09:26:10 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/25 13:49:18 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/06/27 19:26:08 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_list		*ls_init_list(int argc, char *argv[], t_opt *opt)
 		if (argc > 2)
 			l_args = ls_lst_sort(opt, l_args);
 	}
-	if (valid_args == 0 && argc <= 1)
+	if (valid_args == 0 && argc == opt->nb_opt + 1)
 	{
 		l_args = ls_getarg(".", l_args, &valid_args);
 	}
