@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 11:01:08 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/27 19:56:19 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/09 14:43:36 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 static void			ls_process_dir(t_list *l_args, t_opt *opt, t_list *before,
 									int list_len, int ac)
 {
-	(void)before;
+	(void)list_len;
+	(void)ac;
 	if (before)
+	{
 		ft_putstr("\n");
-	if (list_len >= 2 || ac > 2)
-		ft_putendl(ft_strjoin(((t_data *)l_args->content)->name, ":"));
+		ft_putstr(((t_data *)l_args->content)->name);
+		ft_putendl(":");
+	}
 	ls_print_dir(NULL, l_args, opt);
 }
 
@@ -31,7 +34,7 @@ void				ls_process(t_list *l_args, t_opt *opt, int lst_len, int ac)
 
 	before = NULL;
 	start = l_args;
-	ls_get_columns_widths(l_args, widths);
+	ls_get_col_widths(l_args, widths, 1);
 	while (l_args)
 	{
 		if (S_ISDIR(((t_data *)l_args->content)->stats.st_mode))
@@ -39,7 +42,6 @@ void				ls_process(t_list *l_args, t_opt *opt, int lst_len, int ac)
 		else
 		{
 			if (opt->l)
-				//ft_putendl(ft_strjoin("Print -l of ", ((t_data *)l_args->content)->name));
 				ls_print_l((t_data *)l_args->content, NULL, widths);
 			else
 				ft_putendl(((t_data *)l_args->content)->name);

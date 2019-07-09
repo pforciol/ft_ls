@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 19:28:45 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/27 20:04:11 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/09 16:40:34 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,30 @@ void				ls_print_l(t_data *entry, t_data *parent, unsigned int *w)
 	ls_print_type(entry->stats.st_mode);
 	ls_add_spaces(w[0], ft_intlen(entry->stats.st_nlink));
 	ft_putnbr(entry->stats.st_nlink);
+	ft_putchar(' ');
+	if (getpwuid(entry->stats.st_uid))
+	{
+		ft_putstr(getpwuid(entry->stats.st_uid)->pw_name);
+		ls_add_spaces(w[1], ft_strlen(getpwuid(entry->stats.st_uid)->pw_name));
+	}
+	else
+	{
+		ft_putnbr(entry->stats.st_uid);
+		ls_add_spaces(w[1], ft_intlen(entry->stats.st_uid));
+	}
+	if (getgrgid(entry->stats.st_gid))
+	{
+		ft_putstr(getgrgid(entry->stats.st_gid)->gr_name);
+		ls_add_spaces(w[1], ft_strlen(getgrgid(entry->stats.st_gid)->gr_name));
+	}
+	else
+	{
+		ft_putnbr(entry->stats.st_gid);
+		ls_add_spaces(w[1], ft_intlen(entry->stats.st_gid));
+	}
+	ls_add_spaces(w[3], ft_intlen(entry->stats.st_size));
+	ft_putnbr(entry->stats.st_size);
+	
 	//WORK HERE
 	ft_putchar('\n');
 }
