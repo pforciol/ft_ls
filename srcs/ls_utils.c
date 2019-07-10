@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 17:17:15 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/09 16:35:59 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/10 09:38:02 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void				ls_usage(void)
 	exit(ERROR);
 }
 
-void				ls_add_spaces(int width, int len)
+void				ls_add_spaces(int width, int len, int sp)
 {
 	int				i;
 
@@ -94,5 +94,6 @@ void				ls_add_spaces(int width, int len)
 		ft_putchar(' ');
 		i++;
 	}
-	ft_putstr("  ");
+	if (sp == 1)
+		ft_putstr("  ");
 }

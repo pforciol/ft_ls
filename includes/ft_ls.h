@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/09 14:45:53 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/10 13:27:30 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <dirent.h>
 # include <sys/stat.h>
 # include <sys/types.h>
+# include <time.h>
+# include <sys/xattr.h>
 # include <pwd.h>
 # include <grp.h>
 
@@ -78,7 +80,7 @@ void				ls_get_col_widths(t_list *l_args, unsigned int *w, int i);
 t_list				*ls_set_parent(t_list *parent, t_list *l_args);
 void				ls_perror(const char *path, int do_exit);
 void				ls_usage(void);
-void				ls_add_spaces(int width, int len);
+void				ls_add_spaces(int width, int len, int sp);
 
 
 void				debug(t_opt *opt, int argc, t_list *l_args);
