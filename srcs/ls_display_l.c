@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 19:28:45 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/10 13:53:22 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/12 11:47:08 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ static void			ls_print_mtime(time_t mtime)
 	while (i >= start && i < end)
 		ft_putchar(full_time[i++]);
 	ft_putchar(' ');
-	start = (mtime > current + 3600 || mtime < current - 15552000) ? 20 : 11;
-	end = (mtime > current + 3600 || mtime < current - 15552000) ? 24 : 16;
+	start = (mtime > current || mtime < current - 15552000) ? 20 : 11;
+	end = (mtime > current || mtime < current - 15552000) ? 24 : 16;
 	i = start;
 	while (i >= start && i < end)
 	{
@@ -106,14 +106,13 @@ static void			ls_print_name(t_data *entry, t_data *parent, mode_t mode)
 
 void				ls_print_l(t_data *entry, t_data *parent, unsigned int *w)
 {
-	int toto;
 	ls_print_type(entry->stats.st_mode);
-	// if ((toto = listxattr(entry->path, NULL, 0, 0)) != -1)
-	// {
-	// 	ft_putchar('@');
-	// 	ls_add_spaces(w[0], ft_intlen(entry->stats.st_nlink), 0);
-	// }
-	// else
+	if (listxattr(ft_strjoin(parent->name, entry->name), NULL, 0, XATTR_NOFOLLOW) != 0)
+	{
+		ft_putstr("@ ");
+		ls_add_spaces(w[0], ft_intlen(entry->stats.st_nlink), 0);
+	}
+	else
 		ls_add_spaces(w[0], ft_intlen(entry->stats.st_nlink), 1);
 	ft_putnbr(entry->stats.st_nlink);
 	ft_putchar(' ');

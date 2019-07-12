@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/10 13:27:30 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/12 11:46:13 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 typedef struct		s_data
 {
 	char			*name;
-	char			*path;
 	int				is_dir;
 	struct stat		stats;
 }					t_data;
