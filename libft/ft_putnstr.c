@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_args_utils.c                                    :+:      :+:    :+:   */
+/*   ft_putnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/27 09:38:18 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/18 16:35:36 by pforciol         ###   ########.fr       */
+/*   Created: 2019/07/18 16:00:46 by pforciol          #+#    #+#             */
+/*   Updated: 2019/07/18 16:00:47 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_ls.h"
+#include "libft.h"
 
-t_list				*ls_getarg(char *arg, t_list *l_args, int *v_a)
+void	ft_putnstr(char const *s, int len)
 {
-	t_data			*data;
-
-	if (!(data = (t_data *)malloc(sizeof(t_data))))
-		exit(ERROR);
-	if (lstat(arg, &data->stats) != 0)
-		ls_perror(arg, 0);
-	else if (data != NULL)
-	{
-		data->name = ft_strdup(arg);
-		lst_append(&l_args, lst_create(data, sizeof(t_data)));
-		(*v_a)++;
-	}
-	return (l_args);
+	write(1, s, len);
 }

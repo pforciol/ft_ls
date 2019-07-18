@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/12 11:46:13 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/18 16:55:39 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int					get_lst_size(t_list *list);
 t_opt				*ls_get_opts(char *argv[], int argc);
 
 /* PROCESS */
-void				ls_process(t_list *l_args, t_opt *opt, int lst_len, int ac);
+void				ls_process(t_list *l_args, t_opt *opt, int ac);
 
 /* SORT */
 t_list				*ls_lst_sort(t_opt *opt, t_list *l_args);

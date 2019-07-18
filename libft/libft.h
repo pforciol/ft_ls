@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 15:37:17 by pforciol          #+#    #+#             */
-/*   Updated: 2019/03/19 12:21:35 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/18 16:01:36 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int					ft_iscntrl(int c);
 int					ft_isgraph(int c);
 int					ft_ispunct(int c);
 int					ft_isxdigit(int c);
+void				ft_putnstr(char const *s, int len);
 
 int					get_next_line(const int fd, char **line);
 char				**ft_split_whitespaces(char *str);

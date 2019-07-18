@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 10:36:17 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/20 09:07:23 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/18 16:36:56 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list				*lst_create(void *content, size_t size)
 {
 	t_list			*list;
 
- 	if (!(list = (t_list *)malloc(sizeof(t_list))))
+	if (!(list = (t_list *)malloc(sizeof(t_list))))
 		exit(ERROR);
 	list->content = content;
 	list->content_size = size;

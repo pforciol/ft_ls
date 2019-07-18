@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:55:26 by pforciol          #+#    #+#             */
-/*   Updated: 2019/06/25 13:58:33 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/18 16:37:53 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_list				*ls_getfile(char *parent_name, char *name, t_list *l_args)
 	char			*full_name;
 
 	full_name = ft_strjoin(parent_name, name);
-	if(!(data = (t_data *)malloc(sizeof(t_data))))
+	if (!(data = (t_data *)malloc(sizeof(t_data))))
 		exit(ERROR);
 	lstat(full_name, &data->stats);
 	if (data != NULL)
@@ -38,10 +38,10 @@ static t_list		*ls_readdir(DIR *dir, t_list *l_args, t_opt *opt)
 	while ((file = readdir(dir)))
 	{
 		if (opt->a || file->d_name[0] != '.')
-			entries = ls_getfile(((t_data *)l_args->content)->name, 
+			entries = ls_getfile(((t_data *)l_args->content)->name,
 									file->d_name, entries);
 	}
-	return(entries);
+	return (entries);
 }
 
 t_list				*ls_opendir(t_list *parent, t_list *l_args, t_opt *opt)

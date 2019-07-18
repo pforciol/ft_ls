@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 19:28:45 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/12 11:47:08 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/18 18:54:38 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static void			ls_print_permissions(mode_t mode)
 	ft_putchar((mode & S_IXOTH) ? 'x' : '-');
 }
 
-static void			ls_print_type(mode_t mode)
+static void			ls_print_type(mode_t mode, t_data *entry, t_data *parent, 
+									unsigned int *w)
 {
 	if ((mode & S_IFMT) == S_IFREG)
 		ft_putchar('-');
@@ -42,10 +43,19 @@ static void			ls_print_type(mode_t mode)
 	else if ((mode & S_IFMT) == S_IFSOCK)
 		ft_putchar('s');
 	ls_print_permissions(mode);
+	if (listxattr(ft_strjoin(parent ? parent->name : "", entry->name),
+				NULL, 0, XATTR_NOFOLLOW) > 0
+				&& !((mode & S_IFMT) == S_IFCHR || (mode & S_IFMT) == S_IFBLK))
+	{
+		ft_putstr("@ ");
+		ls_add_spaces(w[0], ft_intlen(entry->stats.st_nlink), 0);
+	}
+	else
+		ls_add_spaces(w[0], ft_intlen(entry->stats.st_nlink), 1);
 }
 
-/*  
- *	For files with a time that is more than 6 months old or more than 1 hour 
+/*
+ *	For files with a time that is more than 6 months old or more than 1 hour
  *	into the future, the timestamp contains the year instead of the time of day.
 */
 
@@ -81,6 +91,7 @@ static void			ls_print_name(t_data *entry, t_data *parent, mode_t mode)
 	char			buf[1024];
 	ssize_t			count;
 	char			*path;
+	
 	if (S_ISLNK(mode))
 	{
 		ft_bzero(buf, sizeof(buf));
@@ -106,14 +117,7 @@ static void			ls_print_name(t_data *entry, t_data *parent, mode_t mode)
 
 void				ls_print_l(t_data *entry, t_data *parent, unsigned int *w)
 {
-	ls_print_type(entry->stats.st_mode);
-	if (listxattr(ft_strjoin(parent->name, entry->name), NULL, 0, XATTR_NOFOLLOW) != 0)
-	{
-		ft_putstr("@ ");
-		ls_add_spaces(w[0], ft_intlen(entry->stats.st_nlink), 0);
-	}
-	else
-		ls_add_spaces(w[0], ft_intlen(entry->stats.st_nlink), 1);
+	ls_print_type(entry->stats.st_mode, entry, parent, w);
 	ft_putnbr(entry->stats.st_nlink);
 	ft_putchar(' ');
 	if (getpwuid(entry->stats.st_uid))
@@ -136,8 +140,19 @@ void				ls_print_l(t_data *entry, t_data *parent, unsigned int *w)
 		ft_putnbr(entry->stats.st_gid);
 		ls_add_spaces(w[2], ft_intlen(entry->stats.st_gid), 0);
 	}
-	ls_add_spaces(w[3], ft_intlen(entry->stats.st_size), 1);
-	ft_putnbr(entry->stats.st_size);
+	if (w[6] == 1)
+	{
+		ls_add_spaces(w[4], ft_intlen(entry->stats.st_rdev >> 24), 1);
+		ft_putstr(ft_strjoin(ft_itoa(entry->stats.st_rdev >> 24), ", "));
+		ls_add_spaces(w[5], ft_intlen(entry->stats.st_rdev & 0xFFFFFF), 0);
+		ft_putnbr(entry->stats.st_rdev & 0xFFFFFF);
+
+	}
+	else
+	{
+		ls_add_spaces(w[3], ft_intlen(entry->stats.st_size), 1);
+		ft_putnbr(entry->stats.st_size);
+	}
 	ft_putchar(' ');
 	ls_print_mtime(entry->stats.st_mtime);
 	ft_putchar(' ');

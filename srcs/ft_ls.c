@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 09:26:10 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/12 13:50:00 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/18 16:55:00 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,10 @@ int					main(int argc, char *argv[])
 {
 	t_list			*l_args;
 	t_opt			*opt;
-	int				list_len;
 
 	opt = ls_get_opts(argv, argc);
 	l_args = ls_init_list(argc, argv, opt);
-	list_len = get_lst_size(l_args);
-	ls_process(l_args, opt, list_len, argc);
+	ls_process(l_args, opt, argc);
 	debug(opt, argc, l_args);
 	//ls -a /dev/fd
 	//ls -lRa munki
