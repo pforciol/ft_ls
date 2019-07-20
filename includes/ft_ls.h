@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/18 16:55:39 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/20 18:17:02 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <sys/xattr.h>
 # include <pwd.h>
 # include <grp.h>
+# include <sys/acl.h>
 
 # define ERROR -1
 # define MAX(A, B) (((A) > (B)) ? (A) : (B))

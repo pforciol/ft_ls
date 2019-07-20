@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 19:28:45 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/18 18:54:38 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/20 18:29:05 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static void			ls_print_type(mode_t mode, t_data *entry, t_data *parent,
 		ft_putstr("@ ");
 		ls_add_spaces(w[0], ft_intlen(entry->stats.st_nlink), 0);
 	}
-	else
+	else	
 		ls_add_spaces(w[0], ft_intlen(entry->stats.st_nlink), 1);
 }
 
