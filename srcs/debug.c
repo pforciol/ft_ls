@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 09:23:01 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/20 18:29:35 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/22 14:40:20 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,4 @@ void				debug(t_opt *opt, int argc, t_list *l_args)
 	see_options(opt);
 	args_info(opt, argc);
 	print_args(l_args);
-	ft_printf(acl_get_file("auteur", (acl_type_t)NULL));
 }

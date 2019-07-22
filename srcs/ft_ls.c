@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 09:26:10 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/18 16:55:00 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/22 15:09:48 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,5 @@ int					main(int argc, char *argv[])
 	l_args = ls_init_list(argc, argv, opt);
 	ls_process(l_args, opt, argc);
 	debug(opt, argc, l_args);
-	//ls -a /dev/fd
-	//ls -lRa munki
-	//ls -l /etc && ls -l /etc/
 	return (0);
 }

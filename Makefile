@@ -6,7 +6,7 @@
 #    By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/17 11:47:04 by pforciol          #+#    #+#              #
-#    Updated: 2019/06/27 19:53:19 by pforciol         ###   ########.fr        #
+#    Updated: 2019/07/22 15:32:14 by pforciol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRC =		ft_ls.c \
 			ls_args_utils.c \
 			ls_directory.c \
+			ls_display_l_utils.c \
 			ls_display_l.c \
 			ls_display.c \
 			ls_lst_utils.c \

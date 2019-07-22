@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/20 18:17:02 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/22 16:24:22 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 typedef struct		s_data
 {
 	char			*name;
+	char			*color;
+	char			mode;
 	int				is_dir;
 	struct stat		stats;
 }					t_data;
@@ -48,6 +50,8 @@ typedef struct		s_opt
 /* ARGS UTILS */
 t_list				*ls_getarg(char *arg, t_list *l_args, int *v_a);
 t_list				*ls_getfile(char *parent_name, char *name, t_list *l_args);
+char				ls_get_mode(mode_t mode);
+
 
 
 /* DIRECTORY */

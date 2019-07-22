@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:55:26 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/18 16:37:53 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/07/22 16:24:43 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_list				*ls_getfile(char *parent_name, char *name, t_list *l_args)
 	if (data != NULL)
 	{
 		data->name = ft_strdup(name);
+		data->mode = ls_get_mode(data->stats.st_mode);
+		// data->color = 
 		lst_append(&l_args, lst_create(data, sizeof(t_data)));
 	}
 	return (l_args);
