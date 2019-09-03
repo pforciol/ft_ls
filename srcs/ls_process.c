@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 11:01:08 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/03 17:29:57 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/03 17:35:38 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static void			ls_process_dir(t_list *l_args, t_opt *opt, t_list *before,
 	{
 		if (before)
 			ft_putstr("\n");
-		ls_print_w_color(((t_data *)l_args->content)->name,
-				((t_data *)l_args->content)->stats.st_mode);
+		ft_putstr(((t_data *)l_args->content)->name);
 		ft_putendl(":");
 	}
 	ls_print_dir(NULL, l_args, opt);
@@ -65,8 +64,8 @@ void				ls_process(t_list *l_args, t_opt *opt, int ac)
 		}
 		else
 		{
-				before = ls_process_file(l_args, opt, widths);
-				file++;
+			before = ls_process_file(l_args, opt, widths);
+			file++;
 		}
 		l_args = l_args->next;
 	}
