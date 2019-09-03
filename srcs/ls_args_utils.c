@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 09:38:18 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/22 16:24:54 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:37:30 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,42 @@
 char				ls_get_mode(mode_t mode)
 {
 	if ((mode & S_IFMT) == S_IFREG)
-		ft_putchar('-');
+		return ('-');
 	else if ((mode & S_IFMT) == S_IFIFO)
-		ft_putchar('f');
+		return ('f');
 	else if ((mode & S_IFMT) == S_IFCHR)
-		ft_putchar('c');
+		return ('c');
 	else if ((mode & S_IFMT) == S_IFDIR)
-		ft_putchar('d');
+		return ('d');
 	else if ((mode & S_IFMT) == S_IFBLK)
-		ft_putchar('b');
+		return ('b');
 	else if ((mode & S_IFMT) == S_IFLNK)
-		ft_putchar('l');
+		return ('l');
 	else if ((mode & S_IFMT) == S_IFSOCK)
-		ft_putchar('s');
+		return ('s');
+	return (0);
 }
+
+void			ls_print_w_color(char *name, mode_t mode)
+{
+	if ((mode & S_IFMT) == S_IFDIR)
+		ft_putcolor(name, CYAN, NULL, "BOLD");
+	else if ((mode & S_IFMT) == S_IFLNK)
+		ft_putcolor(name, PURPLE, NULL, NULL);
+	else if ((mode & S_IFMT) == S_IFBLK)
+		ft_putcolor(name, BLUE, BG_CYAN, NULL);
+	else if ((mode & S_IFMT) == S_IFCHR)
+		ft_putcolor(name, BLUE, BG_YELLOW, NULL);
+	else if ((mode & S_IFMT) == S_IFSOCK)
+		ft_putcolor(name, WHITE, NULL, NULL);
+	else if ((mode & S_IFMT) == S_IFIFO)
+		ft_putcolor(name, YELLOW, NULL, NULL);
+	else if (mode & S_IXUSR || mode & S_IXGRP || mode & S_IXOTH)
+		ft_putcolor(name, RED, NULL, NULL);
+	else
+		ft_putstr(name);
+}
+
 
 t_list				*ls_getarg(char *arg, t_list *l_args, int *v_a)
 {

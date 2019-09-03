@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 14:20:46 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/22 15:48:15 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/03 17:03:43 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,21 @@ t_list				*ls_lst_sort(t_opt *opt, t_list *l_args)
 	t_data			*second;
 
 	start = l_args;
-	while (l_args != NULL && l_args->next != NULL)
+	if (opt->f == 0)
 	{
-		first = ((t_data *)l_args->content);
-		second = ((t_data *)l_args->next->content);
-		if ((opt->t == 0 && ls_sort_lexically(opt, first, second) > 0)
-			|| (opt->t > 0 && ls_sort_by_time(opt, first, second) > 0))
+		while (l_args != NULL && l_args->next != NULL)
 		{
-			ls_swap(l_args, l_args->next);
-			l_args = start;
+			first = ((t_data *)l_args->content);
+			second = ((t_data *)l_args->next->content);
+			if ((opt->t == 0 && ls_sort_lexically(opt, first, second) > 0)
+				|| (opt->t > 0 && ls_sort_by_time(opt, first, second) > 0))
+			{
+				ls_swap(l_args, l_args->next);
+				l_args = start;
+			}
+			else
+				l_args = l_args->next;
 		}
-		else
-			l_args = l_args->next;
 	}
 	return (start);
 }

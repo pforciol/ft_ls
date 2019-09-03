@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 15:31:00 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/22 16:08:52 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/03 17:24:24 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,25 +100,31 @@ void			ls_print_name(t_data *entry, t_data *parent, mode_t mode)
 			exit(ERROR);
 		}
 		buf[count] = '\0';
-		ft_putstr(entry->name);
+		ls_print_w_color(entry->name, mode);
 		ft_putstr(" -> ");
-		ft_putendl(buf);
+		ft_putstr(buf);
 	}
 	else
-		ft_putendl(entry->name);
+	{
+		ls_print_w_color(entry->name, mode);
+	}
 }
 
-void			ls_print_uid_and_gid(t_data *ety, unsigned int *w)
+void			ls_print_uid_and_gid(t_data *ety, unsigned int *w, t_opt *opt)
 {
-	if (getpwuid(ety->stats.st_uid))
+	if (opt->g == 0)
 	{
-		ft_putstr(getpwuid(ety->stats.st_uid)->pw_name);
-		ls_add_spaces(w[1], ft_strlen(getpwuid(ety->stats.st_uid)->pw_name), 1);
-	}
-	else
-	{
-		ft_putnbr(ety->stats.st_uid);
-		ls_add_spaces(w[1], ft_intlen(ety->stats.st_uid), 1);
+		if (getpwuid(ety->stats.st_uid))
+		{
+			ft_putstr(getpwuid(ety->stats.st_uid)->pw_name);
+			ls_add_spaces(w[1], ft_strlen(getpwuid(ety->stats.st_uid)->pw_name), 1);
+		}
+	
+		else
+		{
+			ft_putnbr(ety->stats.st_uid);
+			ls_add_spaces(w[1], ft_intlen(ety->stats.st_uid), 1);
+		}
 	}
 	if (getgrgid(ety->stats.st_gid))
 	{

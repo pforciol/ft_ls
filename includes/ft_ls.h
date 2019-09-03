@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/22 16:24:22 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/03 17:28:52 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <pwd.h>
 # include <grp.h>
 # include <sys/acl.h>
+# include <sys/ioctl.h>
 
 # define ERROR -1
 # define MAX(A, B) (((A) > (B)) ? (A) : (B))
@@ -41,9 +42,13 @@ typedef struct		s_opt
 {
 	int				rr;
 	int				a;
+	int				d;
+	int				f;
+	int				g;
 	int				l;
 	int				r;
 	int				t;
+	int				one;
 	int				nb_opt;
 }					t_opt;
 
@@ -51,6 +56,7 @@ typedef struct		s_opt
 t_list				*ls_getarg(char *arg, t_list *l_args, int *v_a);
 t_list				*ls_getfile(char *parent_name, char *name, t_list *l_args);
 char				ls_get_mode(mode_t mode);
+void				ls_print_w_color(char *name, mode_t mode);
 
 
 
@@ -58,11 +64,13 @@ char				ls_get_mode(mode_t mode);
 t_list				*ls_opendir(t_list *parent, t_list *l_args, t_opt *opt);
 
 /* DISPLAY L */
-void				ls_print_l(t_data *entry, t_data *parent, unsigned int *w);
+void				ls_print_l(t_data *entry, t_data *parent, unsigned int *w,
+								t_opt *opt);
 
 
 /* DISPLAY */
 void				ls_print_dir(t_list *parent, t_list *l_args, t_opt *opt);
+void   				ft_putcolor(char *str, char *color, char *bg, char *format);
 
 /* LST UTILS */
 t_list				*lst_create(void *content, size_t size);

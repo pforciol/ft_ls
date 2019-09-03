@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 15:37:17 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/18 16:01:36 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/03 15:34:40 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,19 @@
 # define SUCCESS 1
 # define ERROR -1
 # define END 0
+
+# define WHITE "\033[37m"
+# define BLACK "\033[30m"
+# define GREEN "\033[32m"
+# define CYAN "\033[36m"
+# define PURPLE "\033[35m"
+# define BLUE "\033[34m"
+# define YELLOW "\033[33m"
+# define RED "\033[31m"
+# define BG_CYAN "\033[46m"
+# define BG_YELLOW "\033[43m"
+# define BOLD "\033[1m"
+# define RESET "\033[0m"
 
 typedef struct		s_list
 {

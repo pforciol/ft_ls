@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:26:06 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/22 15:10:12 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/03 17:23:27 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,44 @@ void				ls_print_dir(t_list *parent, t_list *l_args, t_opt *opt)
 	while (d_entries)
 	{
 		if (opt->l)
+		{
 			ls_print_l((t_data *)d_entries->content,
-							(t_data *)l_args->content, widths);
+							(t_data *)l_args->content, widths, opt);
+			if (d_entries->next)
+				ft_putchar('\n');
+		}
+		else if (opt->one)
+		{
+			ls_print_w_color(((t_data *)d_entries->content)->name,
+				((t_data *)d_entries->content)->stats.st_mode);
+			if (d_entries->next)
+				ft_putchar('\n');
+		}
 		else
-			ft_putendl(((t_data *)d_entries->content)->name);
+		{
+			ls_print_w_color(((t_data *)d_entries->content)->name,
+				((t_data *)d_entries->content)->stats.st_mode);
+			ft_putstr("    ");
+		}
 		d_entries = d_entries->next;
 	}
 	d_entries = tmp;
+	ft_putchar('\n');
 	if (opt->rr)
 		ls_print_recursively(d_entries, l_args, opt);
+}
+
+void    ft_putcolor(char *str, char *color, char *bg, char *format)
+{
+	if (color != NULL)
+		ft_putstr(color);
+	if (bg != NULL)
+		ft_putstr(bg);
+	if (format != NULL)
+	{
+		if (ft_strstr(format, "BOLD") != 0)
+			ft_putstr(BOLD);
+	}
+	ft_putstr(str);
+	ft_putstr(RESET);
 }

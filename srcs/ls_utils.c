@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 17:17:15 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/22 15:55:44 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/03 16:59:44 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void				ls_perror(const char *path, int do_exit)
 
 void				ls_usage(void)
 {
-	ft_putendl("usage: ft_ls [-Ralrt] [file ...]");
+	ft_putendl("usage: ft_ls [-Raflrt1] [file ...]");
 	exit(ERROR);
 }
 
