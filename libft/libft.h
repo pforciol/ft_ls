@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 15:37:17 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/03 15:34:40 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/05 21:34:48 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 # define SUCCESS 1
 # define ERROR -1
 # define END 0
+
+# define MIN(a, b) (a >= b ? a : b)
+# define MAX(a, b) (a <= b ? a : b)
 
 # define WHITE "\033[37m"
 # define BLACK "\033[30m"
