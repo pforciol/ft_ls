@@ -6,7 +6,7 @@
 #    By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/17 11:47:04 by pforciol          #+#    #+#              #
-#    Updated: 2019/07/22 15:32:14 by pforciol         ###   ########.fr        #
+#    Updated: 2019/09/05 16:55:41 by pforciol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(INCLUDES) libft/libft.a
 	$(CC) -c $< -o $@
 
 debug: lib $(OBJ)
-	$(CC) -g $(CFLAGS) -o $(NAME) $(SRC) -L libft/ -lft
+	$(CC) -g3 $(CFLAGS) -o $(NAME) $(SRC) -L libft/ -lft
 	@echo "$(DARK_GREY)COMPILATION	 $(GREEN)>>$(NORMAL) ft_ls has been compiled $(DARK_GREY)(ready for debug)$(NORMAL)"
 
 clean:

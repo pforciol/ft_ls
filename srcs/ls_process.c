@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 11:01:08 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/03 17:35:38 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/05 18:39:44 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ void				ls_process(t_list *l_args, t_opt *opt, int ac)
 	ls_get_col_widths(l_args, widths, 1);
 	while (l_args)
 	{
-		if (opt->d == 0)
-		{
-			if (S_ISDIR(((t_data *)l_args->content)->stats.st_mode))
-				((t_data *)l_args->content)->is_dir = 1;
-		}
+		if ((S_ISDIR(((t_data *)l_args->content)->stats.st_mode)
+						|| ((((t_data *)l_args->content)->mode == 'l')
+								&& opendir(((t_data *)l_args->content)->name)))
+						&& opt->d == 0)
+			((t_data *)l_args->content)->is_dir = 1;
 		else
 		{
 			before = ls_process_file(l_args, opt, widths);
@@ -74,7 +74,7 @@ void				ls_process(t_list *l_args, t_opt *opt, int ac)
 	l_args = start;
 	if (opt->d == 0)
 	{
-	while (l_args)
+		while (l_args)
 		{
 			if (((t_data *)l_args->content)->is_dir == 1)
 				ls_process_dir(l_args, opt, before, ac);

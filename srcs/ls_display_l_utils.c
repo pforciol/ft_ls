@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 15:31:00 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/03 17:24:24 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/05 18:46:00 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,6 @@ void			ls_print_uid_and_gid(t_data *ety, unsigned int *w, t_opt *opt)
 			ft_putstr(getpwuid(ety->stats.st_uid)->pw_name);
 			ls_add_spaces(w[1], ft_strlen(getpwuid(ety->stats.st_uid)->pw_name), 1);
 		}
-	
 		else
 		{
 			ft_putnbr(ety->stats.st_uid);

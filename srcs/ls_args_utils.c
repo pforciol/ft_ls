@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 09:38:18 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/03 15:37:30 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/05 18:42:51 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char				ls_get_mode(mode_t mode)
 	return (0);
 }
 
-void			ls_print_w_color(char *name, mode_t mode)
+void				ls_print_w_color(char *name, mode_t mode)
 {
 	if ((mode & S_IFMT) == S_IFDIR)
 		ft_putcolor(name, CYAN, NULL, "BOLD");
@@ -51,7 +51,6 @@ void			ls_print_w_color(char *name, mode_t mode)
 		ft_putstr(name);
 }
 
-
 t_list				*ls_getarg(char *arg, t_list *l_args, int *v_a)
 {
 	t_data			*data;
@@ -64,7 +63,6 @@ t_list				*ls_getarg(char *arg, t_list *l_args, int *v_a)
 	{
 		data->name = ft_strdup(arg);
 		data->mode = ls_get_mode(data->stats.st_mode);
-		// data->color = 
 		lst_append(&l_args, lst_create(data, sizeof(t_data)));
 		(*v_a)++;
 	}

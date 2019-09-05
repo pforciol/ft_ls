@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/03 17:28:52 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/03 17:45:02 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FT_LS_H
 
 # include "../libft/libft.h"
-# include <stdio.h>
 # include <dirent.h>
 # include <sys/stat.h>
 # include <sys/types.h>
@@ -24,10 +23,6 @@
 # include <grp.h>
 # include <sys/acl.h>
 # include <sys/ioctl.h>
-
-# define ERROR -1
-# define MAX(A, B) (((A) > (B)) ? (A) : (B))
-# define MIN(A, B) (((A) < (B)) ? (A) : (B))
 
 typedef struct		s_data
 {

@@ -6,12 +6,11 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 17:17:15 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/03 16:59:44 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/05 18:45:12 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_ls.h"
-#include "stdio.h"
+#include "../includes/ls_utils.h"
 
 void				ls_get_col_widths(t_list *l_args, unsigned int *w, int i)
 {
@@ -40,32 +39,33 @@ void				ls_get_col_widths(t_list *l_args, unsigned int *w, int i)
 	}
 }
 
-t_list				*ls_set_parent(t_list *parent, t_list *l_args)
+t_list				*ls_set_parent(t_list *prt, t_list *l_args)
 {
-	char		*parent_path;
-	char		*parent_name;
+	char		*prt_path;
+	char		*prt_name;
 	char		*name;
 
-	parent_path = NULL;
+	prt_path = NULL;
 	name = ft_strdup(((t_data *)l_args->content)->name);
-	if (parent)
+	if (prt)
 	{
-		parent_name = ft_strdup(((t_data *)parent->content)->name);
-		if ((!ft_strequ(parent_name, name)))
+		prt_name = ft_strdup(((t_data *)prt->content)->name);
+		if ((!ft_strequ(prt_name, name)))
 		{
-			parent_path = ft_strjoin(parent_name, name);
-			name = ft_strjoin(parent_path, "/");
+			prt_path = ft_strjoin(prt_name, name);
+			name = ft_strjoin(prt_path, ft_strequ(prt_path, "/") ? "" : "/");
 		}
 		ft_putchar('\n');
 		ft_putnstr(name, ft_strlen(name) - 1);
 		ft_putendl(":");
-		free(parent_name);
+		free(prt_name);
 	}
 	else
-		name = ft_strjoin(name, "/");
+		name = ft_strequ(name, "/") ? name : ft_strjoin(name, "/");
 	free(((t_data *)l_args->content)->name);
-	((t_data *)l_args->content)->name = name;
-	free(parent_path);
+	((t_data *)l_args->content)->name = ft_strdup(name);
+	free(name);
+	free(prt_path);
 	return (l_args);
 }
 
@@ -75,6 +75,7 @@ void				ls_perror(const char *path, int do_exit)
 
 	message = ft_strjoin("ft_ls: ", path);
 	perror(message);
+	free(message);
 	if (do_exit == 1)
 		exit(ERROR);
 }
