@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:26:06 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/05 18:43:43 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/10 15:55:38 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,25 @@
 
 void				ls_print_recursively(t_list *d_entries, t_list *l_args,
 											t_opt *opt)
-{
+{	
 	while (d_entries)
 	{
 		if (S_ISDIR(((t_data *)d_entries->content)->stats.st_mode) &&
 				!ft_strequ(((t_data *)d_entries->content)->name, ".") &&
 				!ft_strequ(((t_data *)d_entries->content)->name, ".."))
+		{
 			ls_print_dir(l_args, d_entries, opt);
+		}
 		d_entries = d_entries->next;
 	}
+	lst_clear(&d_entries);
 }
 
 static void			ls_print_total(t_list *d_entries)
 {
 	blkcnt_t		total;
+	char			*stotal;
+	char			*blocks;
 
 	total = 0;
 	while (d_entries)
@@ -35,7 +40,11 @@ static void			ls_print_total(t_list *d_entries)
 		total += ((t_data *)d_entries->content)->stats.st_blocks;
 		d_entries = d_entries->next;
 	}
-	ft_putendl(ft_strjoin("total ", ft_itoa(total)));
+	stotal = ft_itoa(total);
+	blocks = ft_strjoin("total ", stotal);
+	ft_putendl(blocks);
+	free(stotal);
+	free(blocks);
 }
 
 void				ls_print_dir(t_list *parent, t_list *l_args, t_opt *opt)
@@ -79,6 +88,7 @@ void				ls_print_dir(t_list *parent, t_list *l_args, t_opt *opt)
 	ft_putchar('\n');
 	if (opt->rr)
 		ls_print_recursively(d_entries, l_args, opt);
+	lst_clear(&tmp);
 }
 
 void				ft_putcolor(char *str, char *color, char *bg, char *format)

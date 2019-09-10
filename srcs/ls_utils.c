@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 17:17:15 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/05 18:45:12 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/10 16:42:09 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,14 @@ t_list				*ls_set_parent(t_list *prt, t_list *l_args)
 
 	prt_path = NULL;
 	name = ft_strdup(((t_data *)l_args->content)->name);
+	((t_data *)l_args->content)->hasparent = prt ? 1 : 0;
 	if (prt)
 	{
 		prt_name = ft_strdup(((t_data *)prt->content)->name);
 		if ((!ft_strequ(prt_name, name)))
 		{
 			prt_path = ft_strjoin(prt_name, name);
+			free(name);
 			name = ft_strjoin(prt_path, ft_strequ(prt_path, "/") ? "" : "/");
 		}
 		ft_putchar('\n');
@@ -60,8 +62,11 @@ t_list				*ls_set_parent(t_list *prt, t_list *l_args)
 		ft_putendl(":");
 		free(prt_name);
 	}
-	else
-		name = ft_strequ(name, "/") ? name : ft_strjoin(name, "/");
+	else if (!(ft_strequ(name, "/")))
+	{
+		free(name);
+		name = ft_strjoin(name, "/");
+	}
 	free(((t_data *)l_args->content)->name);
 	((t_data *)l_args->content)->name = ft_strdup(name);
 	free(name);
@@ -82,7 +87,7 @@ void				ls_perror(const char *path, int do_exit)
 
 void				ls_usage(void)
 {
-	ft_putendl("usage: ft_ls [-Raflrt1] [file ...]");
+	ft_putendl("usage: ft_ls [-Radfglrt1] [file ...]");
 	exit(ERROR);
 }
 

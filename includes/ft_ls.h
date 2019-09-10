@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/17 11:57:14 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/03 17:45:02 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/10 13:09:35 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@
 # include <grp.h>
 # include <sys/acl.h>
 # include <sys/ioctl.h>
+# include <stdio.h>
 
 typedef struct		s_data
 {
 	char			*name;
-	char			*color;
 	char			mode;
 	int				is_dir;
+	int				hasparent;
 	struct stat		stats;
 }					t_data;
 
@@ -72,6 +73,7 @@ t_list				*lst_create(void *content, size_t size);
 void				lst_append(t_list **list, t_list *to_append);
 void				lst_clear(t_list **list);
 int					get_lst_size(t_list *list);
+void				lst_clear_tdata(t_list **list);
 
 /* OPTIONS */
 t_opt				*ls_get_opts(char *argv[], int argc);

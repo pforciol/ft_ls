@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 10:36:17 by pforciol          #+#    #+#             */
-/*   Updated: 2019/07/18 16:36:56 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/10 13:43:14 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void				lst_clear(t_list **list)
 	while (tmp != NULL)
 	{
 		*list = (*list)->next;
+		free(((t_data *)tmp->content)->name);
 		free(tmp->content);
 		free(tmp);
 		tmp = *list;
