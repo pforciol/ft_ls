@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 11:01:08 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/10 14:33:25 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/11 14:48:27 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,12 @@ static t_list		*ls_process_file(t_list *l_args, t_opt *opt,
 	return (l_args);
 }
 
-void				ls_process(t_list *l_args, t_opt *opt, int ac)
+int					ls_pre_process(t_list *l_args, t_list *before, t_opt *opt,
+										unsigned int *widths)
 {
-	unsigned int	widths[7];
-	t_list			*before;
-	t_list			*start;
 	int				file;
 
-	before = NULL;
-	start = l_args;
 	file = 0;
-	ls_get_col_widths(l_args, widths, 1);
 	while (l_args)
 	{
 		if ((S_ISDIR(((t_data *)l_args->content)->stats.st_mode)
@@ -69,6 +64,21 @@ void				ls_process(t_list *l_args, t_opt *opt, int ac)
 		}
 		l_args = l_args->next;
 	}
+	return (file);
+}
+
+void				ls_process(t_list *l_args, t_opt *opt, int ac)
+{
+	unsigned int	widths[7];
+	t_list			*before;
+	t_list			*start;
+	int				file;
+
+	before = NULL;
+	start = l_args;
+	file = 0;
+	ls_get_col_widths(l_args, widths, 1);
+	file += ls_pre_process(l_args, before, opt, widths);
 	if (file > 0)
 		ft_putchar('\n');
 	l_args = start;

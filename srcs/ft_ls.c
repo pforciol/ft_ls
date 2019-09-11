@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 09:26:10 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/10 17:10:58 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/11 12:57:41 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,5 @@ int					main(int argc, char *argv[])
 	ls_process(l_args, opt, argc);
 	free(opt);
 	lst_clear(&l_args);
-	//while (1);
-	return (0);
+	return (EXIT_SUCCESS);
 }

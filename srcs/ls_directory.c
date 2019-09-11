@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:55:26 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/10 12:02:39 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/11 15:00:20 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ t_list				*ls_getfile(char *parent_name, char *name, t_list *l_args)
 	t_data			*data;
 	char			*full_name;
 
-	full_name = ft_strjoin(parent_name, name);
+	if (!(full_name = ft_strjoin(parent_name, name)))
+		ls_error(NULL, MEM_ERROR);
 	if (!(data = (t_data *)malloc(sizeof(t_data))))
-		exit(ERROR);
+		ls_error(NULL, MEM_ERROR);
 	lstat(full_name, &data->stats);
 	if (data != NULL)
 	{
-		data->name = ft_strdup(name);
+		if (!(data->name = ft_strdup(name)))
+			ls_error(NULL, MEM_ERROR);
 		data->mode = ls_get_mode(data->stats.st_mode);
 		lst_append(&l_args, lst_create(data, sizeof(t_data)));
 	}
@@ -55,12 +57,13 @@ t_list				*ls_opendir(t_list *parent, t_list *l_args, t_opt *opt)
 	char			*name;
 
 	entries = NULL;
-	name = ft_strdup(((t_data *)l_args->content)->name);
+	if (!(name = ft_strdup(((t_data *)l_args->content)->name)))
+		ls_error(NULL, MEM_ERROR);
 	l_args = ls_set_parent(parent, l_args);
 	dir = opendir(((t_data *)l_args->content)->name);
 	if (!dir)
 	{
-		ls_perror(name, 0);
+		ls_error(name, ERRNO_ERROR);
 		free(name);
 		return (NULL);
 	}

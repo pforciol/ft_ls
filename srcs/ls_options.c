@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 15:06:24 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/05 18:47:23 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/11 15:30:24 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ static void			ls_valid_opt(char c)
 {
 	if (ft_strchr("Radfglrt1", (int)c) == NULL || c == '\0')
 	{
-		ft_putstr("ft_ls: illegal option -- ");
-		ft_putchar(c);
-		ft_putchar('\n');
+		ft_putstr_fd("ft_ls: illegal option -- ", 2);
+		ft_putchar_fd(c, 2);
+		ft_putchar_fd('\n', 2);
 		ls_usage();
 	}
 }
@@ -38,9 +38,9 @@ static int			ls_set_opts(char *arg, t_opt *opt)
 	{
 		ls_valid_opt(arg[i]);
 		opt->rr = (arg[i] == 'R' ? 1 : opt->rr);
+		opt->a = (arg[i] == 'a' ? 1 : opt->a);
 		opt->d = (arg[i] == 'd' ? 1 : opt->d);
 		opt->f = (arg[i] == 'f' ? 1 : opt->f);
-		opt->a = opt->f == 1 ? 1 : (arg[i] == 'a' ? 1 : opt->a);
 		opt->l = (arg[i] == 'l' ? 1 : opt->l);
 		opt->r = (arg[i] == 'r' ? 1 : opt->r);
 		opt->t = (arg[i] == 't' ? 1 : opt->t);
@@ -56,7 +56,7 @@ static t_opt		*ls_init_opts(void)
 	t_opt			*opt;
 
 	if (!(opt = malloc(sizeof(t_opt))))
-		exit(ERROR);
+		ls_error(NULL, MEM_ERROR);
 	opt->rr = 0;
 	opt->a = 0;
 	opt->d = 0;
@@ -84,5 +84,7 @@ t_opt				*ls_get_opts(char *argv[], int argc)
 		opt->nb_opt++;
 		i++;
 	}
+	if (opt->f == 1)
+		opt->a = 1;
 	return (opt);
 }

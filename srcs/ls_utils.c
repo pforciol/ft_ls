@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 17:17:15 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/10 16:42:09 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/11 16:17:47 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,56 +39,73 @@ void				ls_get_col_widths(t_list *l_args, unsigned int *w, int i)
 	}
 }
 
+void				ls_has_parent(char **prt_path, char **name, t_list *prt)
+{
+	char			*prt_name;
+
+	if (!(prt_name = ft_strdup(((t_data *)prt->content)->name)))
+		ls_error(NULL, MEM_ERROR);
+	if ((!ft_strequ(prt_name, *name)))
+	{
+		if (!(*prt_path = ft_strjoin(prt_name, *name)))
+			ls_error(NULL, MEM_ERROR);
+		free(*name);
+		if (!(*name = ft_strjoin(*prt_path,
+									ft_strequ(*prt_path, "/") ? "" : "/")))
+			ls_error(NULL, MEM_ERROR);
+	}
+	ft_putchar('\n');
+	ft_putnstr(*name, ft_strlen(*name) - 1);
+	ft_putendl(":");
+	free(prt_name);
+}
+
 t_list				*ls_set_parent(t_list *prt, t_list *l_args)
 {
 	char		*prt_path;
-	char		*prt_name;
 	char		*name;
 
 	prt_path = NULL;
-	name = ft_strdup(((t_data *)l_args->content)->name);
-	((t_data *)l_args->content)->hasparent = prt ? 1 : 0;
+	if (!(name = ft_strdup(((t_data *)l_args->content)->name)))
+		ls_error(NULL, MEM_ERROR);
 	if (prt)
 	{
-		prt_name = ft_strdup(((t_data *)prt->content)->name);
-		if ((!ft_strequ(prt_name, name)))
-		{
-			prt_path = ft_strjoin(prt_name, name);
-			free(name);
-			name = ft_strjoin(prt_path, ft_strequ(prt_path, "/") ? "" : "/");
-		}
-		ft_putchar('\n');
-		ft_putnstr(name, ft_strlen(name) - 1);
-		ft_putendl(":");
-		free(prt_name);
+		ls_has_parent(&prt_path, &name, prt);
 	}
 	else if (!(ft_strequ(name, "/")))
 	{
 		free(name);
-		name = ft_strjoin(name, "/");
+		if (!(name = ft_strjoin(name, "/")))
+			ls_error(NULL, MEM_ERROR);
 	}
 	free(((t_data *)l_args->content)->name);
-	((t_data *)l_args->content)->name = ft_strdup(name);
+	if (!(((t_data *)l_args->content)->name = ft_strdup(name)))
+		ls_error(NULL, MEM_ERROR);
 	free(name);
 	free(prt_path);
 	return (l_args);
 }
 
-void				ls_perror(const char *path, int do_exit)
+void				ls_error(const char *path, int error)
 {
-	char			*message;
-
-	message = ft_strjoin("ft_ls: ", path);
-	perror(message);
-	free(message);
-	if (do_exit == 1)
-		exit(ERROR);
+	ft_putstr_fd("ft_ls: ", 2);
+	if (error == ERRNO_ERROR)
+	{
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd(": ", 2);
+		perror(NULL);
+	}
+	else if (error == MEM_ERROR)
+	{
+		perror(NULL);
+		exit(EXIT_FAILURE);
+	}
 }
 
 void				ls_usage(void)
 {
-	ft_putendl("usage: ft_ls [-Radfglrt1] [file ...]");
-	exit(ERROR);
+	ft_putendl_fd("usage: ft_ls [-Radfglrt1] [file ...]", 2);
+	exit(EXIT_FAILURE);
 }
 
 void				ls_add_spaces(int width, int len, int sp)

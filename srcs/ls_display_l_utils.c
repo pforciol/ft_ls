@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/22 15:31:00 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/10 12:04:07 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/11 16:14:14 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void			ls_print_type(mode_t mode, t_data *entry, t_data *parent,
 	char			*attribute;
 	char			*path;
 
-	path = ft_strjoin(parent ? parent->name : "", entry->name);
+	if (!(path = ft_strjoin(parent ? parent->name : "", entry->name)))
+		ls_error(NULL, MEM_ERROR);
 	ft_putchar(entry->mode);
 	if ((attribute = ls_permissions(mode, path)))
 	{
@@ -83,33 +84,40 @@ void			ls_print_mtime(time_t mtime)
 	}
 }
 
+void			ls_get_link(t_data *parent, t_data *entry, char buf[1024])
+{
+	ssize_t count;
+	char	*path;
+	char	*path2;
+
+	if (parent)
+	{
+		if (!(path2 = ft_strjoin("/", entry->name)))
+			ls_error(NULL, MEM_ERROR);
+		if (!(path = ft_strjoin(parent->name, path2)))
+			ls_error(NULL, MEM_ERROR);
+		free(path2);
+	}
+	else if (!(path = ft_strdup(entry->name)))
+		ls_error(NULL, MEM_ERROR);
+	count = readlink(path, buf, sizeof((char *)buf));
+	if (count < 0)
+	{
+		free(path);
+		ls_error(path, ERRNO_ERROR);
+	}
+	free(path);
+	buf[count] = '\0';
+}
+
 void			ls_print_name(t_data *entry, t_data *parent, mode_t mode)
 {
 	char			buf[1024];
-	ssize_t			count;
-	char			*path;
-	char			*path2;
 
 	if (S_ISLNK(mode))
 	{
 		ft_bzero(buf, sizeof(buf));
-		if (parent)
-		{
-			path2 = ft_strjoin("/", entry->name);
-			path = ft_strjoin(parent->name, path2);
-			free(path2);
-		}
-		else
-			path = ft_strdup(entry->name);
-		count = readlink(path, buf, sizeof(buf));
-		if (count < 0)
-		{
-			free(path);
-			ls_perror(path, 1);
-			exit(ERROR);
-		}
-		free(path);
-		buf[count] = '\0';
+		ls_get_link(parent, entry, buf);
 		ls_print_w_color(entry->name, mode);
 		ft_putstr(" -> ");
 		ft_putstr(buf);
@@ -118,6 +126,7 @@ void			ls_print_name(t_data *entry, t_data *parent, mode_t mode)
 	{
 		ls_print_w_color(entry->name, mode);
 	}
+	free(buf);
 }
 
 void			ls_print_uid_and_gid(t_data *ety, unsigned int *w, t_opt *opt)
@@ -127,7 +136,8 @@ void			ls_print_uid_and_gid(t_data *ety, unsigned int *w, t_opt *opt)
 		if (getpwuid(ety->stats.st_uid))
 		{
 			ft_putstr(getpwuid(ety->stats.st_uid)->pw_name);
-			ls_add_spaces(w[1], ft_strlen(getpwuid(ety->stats.st_uid)->pw_name), 1);
+			ls_add_spaces(w[1], ft_strlen(
+									getpwuid(ety->stats.st_uid)->pw_name), 1);
 		}
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 19:28:45 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/10 12:03:35 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/11 15:02:17 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void				ls_print_l(t_data *entry, t_data *parent, unsigned int *w,
 	if (w[6] == 1)
 	{
 		ls_add_spaces(w[4], ft_intlen(entry->stats.st_rdev >> 24), 1);
-		ft_putstr(ft_strjoin(ft_itoa(entry->stats.st_rdev >> 24), ", "));
+		ft_putstr(ft_itoa(entry->stats.st_rdev >> 24));
+		ft_putstr(", ");
 		ls_add_spaces(w[5], ft_intlen(entry->stats.st_rdev & 0xFFFFFF), 0);
 		ft_putnbr(entry->stats.st_rdev & 0xFFFFFF);
 	}

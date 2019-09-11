@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:26:06 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/10 15:55:38 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/11 15:32:10 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void				ls_print_recursively(t_list *d_entries, t_list *l_args,
 											t_opt *opt)
-{	
+{
 	while (d_entries)
 	{
 		if (S_ISDIR(((t_data *)d_entries->content)->stats.st_mode) &&
@@ -41,10 +41,37 @@ static void			ls_print_total(t_list *d_entries)
 		d_entries = d_entries->next;
 	}
 	stotal = ft_itoa(total);
-	blocks = ft_strjoin("total ", stotal);
+	if (!(blocks = ft_strjoin("total ", stotal)))
+		ls_error(NULL, MEM_ERROR);
 	ft_putendl(blocks);
 	free(stotal);
 	free(blocks);
+}
+
+void				ls_print_d_entries(t_list *d_entries, t_list *l_args,
+											t_opt *opt, unsigned int *widths)
+{
+	if (opt->l)
+	{
+		ls_print_l((t_data *)d_entries->content,
+						(t_data *)l_args->content, widths, opt);
+		if (d_entries->next)
+			ft_putchar('\n');
+	}
+	else if (opt->one)
+	{
+		ls_print_w_color(((t_data *)d_entries->content)->name,
+			((t_data *)d_entries->content)->stats.st_mode);
+		if (d_entries->next)
+			ft_putchar('\n');
+	}
+	else
+	{
+		ls_print_w_color(((t_data *)d_entries->content)->name,
+			((t_data *)d_entries->content)->stats.st_mode);
+		if (d_entries->next)
+			ft_putstr("    ");
+	}
 }
 
 void				ls_print_dir(t_list *parent, t_list *l_args, t_opt *opt)
@@ -62,26 +89,7 @@ void				ls_print_dir(t_list *parent, t_list *l_args, t_opt *opt)
 	ls_get_col_widths(d_entries, widths, 0);
 	while (d_entries)
 	{
-		if (opt->l)
-		{
-			ls_print_l((t_data *)d_entries->content,
-							(t_data *)l_args->content, widths, opt);
-			if (d_entries->next)
-				ft_putchar('\n');
-		}
-		else if (opt->one)
-		{
-			ls_print_w_color(((t_data *)d_entries->content)->name,
-				((t_data *)d_entries->content)->stats.st_mode);
-			if (d_entries->next)
-				ft_putchar('\n');
-		}
-		else
-		{
-			ls_print_w_color(((t_data *)d_entries->content)->name,
-				((t_data *)d_entries->content)->stats.st_mode);
-			ft_putstr("    ");
-		}
+		ls_print_d_entries(d_entries, l_args, opt, widths);
 		d_entries = d_entries->next;
 	}
 	d_entries = tmp;
