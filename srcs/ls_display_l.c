@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 19:28:45 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/12 16:04:27 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/12 17:10:26 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static char			*ls_permissions(mode_t mode, char *path)
 {
-	acl_t acl;
+	acl_t			acl;
 
 	ft_putchar((mode & S_IRUSR) ? 'r' : '-');
 	ft_putchar((mode & S_IWUSR) ? 'w' : '-');
@@ -84,7 +84,8 @@ static void			ls_print_mtime(time_t mtime)
 	}
 }
 
-static void			ls_print_uid_and_gid(t_data *ety, unsigned int *w, t_opt *opt)
+static void			ls_print_uid_and_gid(t_data *ety, unsigned int *w,
+											t_opt *opt)
 {
 	if (opt->g == 0)
 	{

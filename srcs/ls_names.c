@@ -6,15 +6,15 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 14:37:06 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/12 16:04:24 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/12 17:11:38 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-static void			ls_has_parent(char **prt_path, char **name, t_list *prt)
+static void		ls_has_parent(char **prt_path, char **name, t_list *prt)
 {
-	char			*prt_name;
+	char		*prt_name;
 
 	if (!(prt_name = ft_strdup(((t_data *)prt->content)->name)))
 		ls_error(NULL, MEM_ERROR);
@@ -33,7 +33,7 @@ static void			ls_has_parent(char **prt_path, char **name, t_list *prt)
 	free(prt_name);
 }
 
-t_list				*ls_set_parent(t_list *prt, t_list *l_args)
+t_list			*ls_set_parent(t_list *prt, t_list *l_args)
 {
 	char		*prt_path;
 	char		*name;
@@ -63,7 +63,7 @@ static char		*ls_get_link(t_data *parent, t_data *entry)
 {
 	char		*path;
 	char		*path2;
-	
+
 	if (parent)
 	{
 		if (!(path2 = ft_strjoin("/", entry->name)))
@@ -73,16 +73,18 @@ static char		*ls_get_link(t_data *parent, t_data *entry)
 		free(path2);
 	}
 	else
+	{
 		if (!(path = ft_strdup(entry->name)))
 			ls_error(NULL, MEM_ERROR);
+	}
 	return (path);
 }
 
 void			ls_print_name(t_data *entry, t_data *parent, mode_t mode)
 {
-	char			buf[1024];
-	ssize_t			count;
-	char			*path;
+	char		buf[1024];
+	ssize_t		count;
+	char		*path;
 
 	if (S_ISLNK(mode))
 	{

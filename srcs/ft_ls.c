@@ -6,13 +6,13 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 09:26:10 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/12 16:04:28 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/12 17:09:07 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-static t_list				*ls_getarg(char *arg, t_list *l_args, int *v_a)
+static t_list		*ls_getarg(char *arg, t_list *l_args, int *v_a)
 {
 	t_data			*data;
 

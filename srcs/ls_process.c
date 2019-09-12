@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 11:01:08 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/12 16:04:47 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/12 20:14:28 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void			ls_process_dir(t_list *l_args, t_opt *opt, t_list *before,
 	if (before || ac - 1 - opt->nb_opt >= 2)
 	{
 		if (before)
-			ft_putstr("\n");
+			ft_putstr("\n\n");
 		ft_putstr(((t_data *)l_args->content)->name);
 		ft_putendl(":");
 	}
@@ -29,11 +29,17 @@ static t_list		*ls_process_file(t_list *l_args, t_opt *opt,
 												unsigned int *widths)
 {
 	if (opt->l)
+	{
 		ls_print_l((t_data *)l_args->content, NULL, widths, opt);
+		if (l_args->next)
+			ft_putchar('\n');
+	}
 	else if (opt->one)
 	{
 		ls_print_w_color(((t_data *)l_args->content)->name,
 				((t_data *)l_args->content)->stats.st_mode);
+		if (l_args->next)
+			ft_putchar('\n');
 	}
 	else
 	{
@@ -51,12 +57,12 @@ static int			ls_pre_process(t_list *l_args, t_list *before, t_opt *opt,
 	DIR				*tmp_dir;
 
 	file = 0;
-	tmp_dir = NULL;
 	while (l_args)
 	{
+		tmp_dir = NULL;
 		if ((S_ISDIR(((t_data *)l_args->content)->stats.st_mode)
 					|| ((((t_data *)l_args->content)->mode == 'l')
-					&& (tmp_dir = opendir(((t_data *)l_args->content)->name)) 
+					&& (tmp_dir = opendir(((t_data *)l_args->content)->name))
 					&& opt->l == 0)) && opt->d == 0)
 			((t_data *)l_args->content)->is_dir = 1;
 		else
@@ -68,6 +74,8 @@ static int			ls_pre_process(t_list *l_args, t_list *before, t_opt *opt,
 		if (tmp_dir)
 			closedir(tmp_dir);
 	}
+	if (file != 0 || get_lst_size(l_args) - 1 - opt->nb_opt != 0)
+		ft_putchar('\n');
 	return (file);
 }
 
@@ -84,9 +92,8 @@ void				ls_process(t_list *l_args, t_opt *opt, int ac)
 	if (opt->l)
 		ls_get_col_widths(l_args, widths, 1);
 	file += ls_pre_process(l_args, before, opt, widths);
-	if (file > 0)
-		ft_putchar('\n');
 	l_args = start;
+	ft_putstr((file > 1 && opt->l == 0 && before) ? "\n\n" : "\0");
 	if (opt->d == 0)
 	{
 		while (l_args)

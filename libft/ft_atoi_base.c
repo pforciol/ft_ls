@@ -31,7 +31,7 @@ int			ft_atoi_base(const char *str, char *base)
 	int		res;
 	int		i;
 	int		sign;
-	int 	base_len;
+	int		base_len;
 
 	base_len = ft_strlen(base);
 	res = 0;

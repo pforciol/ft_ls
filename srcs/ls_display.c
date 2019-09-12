@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:26:06 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/12 16:04:46 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/12 18:08:14 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,13 @@ static void			ls_print_d_entries(t_list *d_entries, t_list *l_args,
 	{
 		ls_print_l((t_data *)d_entries->content,
 						(t_data *)l_args->content, widths, opt);
-		if (d_entries->next)
-			ft_putchar('\n');
+		ft_putchar('\n');
 	}
 	else if (opt->one)
 	{
 		ls_print_w_color(((t_data *)d_entries->content)->name,
 			((t_data *)d_entries->content)->stats.st_mode);
-		if (d_entries->next)
-			ft_putchar('\n');
+		ft_putchar('\n');
 	}
 	else
 	{
@@ -95,7 +93,6 @@ void				ls_print_dir(t_list *parent, t_list *l_args, t_opt *opt)
 		d_entries = d_entries->next;
 	}
 	d_entries = tmp;
-	ft_putchar('\n');
 	if (opt->rr)
 		ls_print_recursively(d_entries, l_args, opt);
 	lst_clear(&tmp);
