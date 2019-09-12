@@ -6,13 +6,13 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:26:06 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/11 15:32:10 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/12 16:04:46 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-void				ls_print_recursively(t_list *d_entries, t_list *l_args,
+static void			ls_print_recursively(t_list *d_entries, t_list *l_args,
 											t_opt *opt)
 {
 	while (d_entries)
@@ -48,7 +48,7 @@ static void			ls_print_total(t_list *d_entries)
 	free(blocks);
 }
 
-void				ls_print_d_entries(t_list *d_entries, t_list *l_args,
+static void			ls_print_d_entries(t_list *d_entries, t_list *l_args,
 											t_opt *opt, unsigned int *widths)
 {
 	if (opt->l)
@@ -83,10 +83,12 @@ void				ls_print_dir(t_list *parent, t_list *l_args, t_opt *opt)
 	if (!(d_entries = ls_opendir(parent, l_args, opt)))
 		return ;
 	if (opt->l)
+	{
+		ls_get_col_widths(d_entries, widths, 0);
 		ls_print_total(d_entries);
+	}
 	ls_lst_sort(opt, d_entries);
 	tmp = d_entries;
-	ls_get_col_widths(d_entries, widths, 0);
 	while (d_entries)
 	{
 		ls_print_d_entries(d_entries, l_args, opt, widths);
@@ -97,19 +99,4 @@ void				ls_print_dir(t_list *parent, t_list *l_args, t_opt *opt)
 	if (opt->rr)
 		ls_print_recursively(d_entries, l_args, opt);
 	lst_clear(&tmp);
-}
-
-void				ft_putcolor(char *str, char *color, char *bg, char *format)
-{
-	if (color != NULL)
-		ft_putstr(color);
-	if (bg != NULL)
-		ft_putstr(bg);
-	if (format != NULL)
-	{
-		if (ft_strstr(format, "BOLD") != 0)
-			ft_putstr(BOLD);
-	}
-	ft_putstr(str);
-	ft_putstr(RESET);
 }

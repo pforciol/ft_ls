@@ -6,13 +6,13 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:55:26 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/11 15:00:20 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/12 16:04:28 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-t_list				*ls_getfile(char *parent_name, char *name, t_list *l_args)
+static t_list				*ls_getfile(char *parent_name, char *name, t_list *l_args)
 {
 	t_data			*data;
 	char			*full_name;

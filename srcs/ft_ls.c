@@ -6,11 +6,33 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 09:26:10 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/11 12:57:41 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/12 16:04:28 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+
+static t_list				*ls_getarg(char *arg, t_list *l_args, int *v_a)
+{
+	t_data			*data;
+
+	if (!(data = (t_data *)malloc(sizeof(t_data))))
+		ls_error(NULL, MEM_ERROR);
+	if (lstat(arg, &data->stats) != 0)
+	{
+		free(data);
+		ls_error(arg, ERRNO_ERROR);
+	}
+	else
+	{
+		if (!(data->name = ft_strdup(arg)))
+			ls_error(NULL, MEM_ERROR);
+		data->mode = ls_get_mode(data->stats.st_mode);
+		lst_append(&l_args, lst_create(data, sizeof(t_data)));
+		(*v_a)++;
+	}
+	return (l_args);
+}
 
 static t_list		*ls_init_list(int argc, char *argv[], t_opt *opt)
 {

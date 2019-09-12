@@ -1,2 +1,0 @@
-Need to fix leaks when ls -R on link (eg: ./ft_ls -R /etc)
-REORGANIZE FUNCTIONS IN FILES AND DO A SINGLE .H BY .C !!!

@@ -6,11 +6,11 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/25 17:17:15 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/11 16:17:47 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/12 16:04:19 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ls_utils.h"
+#include "../includes/ft_ls.h"
 
 void				ls_get_col_widths(t_list *l_args, unsigned int *w, int i)
 {
@@ -37,53 +37,6 @@ void				ls_get_col_widths(t_list *l_args, unsigned int *w, int i)
 		}
 		l_args = l_args->next;
 	}
-}
-
-void				ls_has_parent(char **prt_path, char **name, t_list *prt)
-{
-	char			*prt_name;
-
-	if (!(prt_name = ft_strdup(((t_data *)prt->content)->name)))
-		ls_error(NULL, MEM_ERROR);
-	if ((!ft_strequ(prt_name, *name)))
-	{
-		if (!(*prt_path = ft_strjoin(prt_name, *name)))
-			ls_error(NULL, MEM_ERROR);
-		free(*name);
-		if (!(*name = ft_strjoin(*prt_path,
-									ft_strequ(*prt_path, "/") ? "" : "/")))
-			ls_error(NULL, MEM_ERROR);
-	}
-	ft_putchar('\n');
-	ft_putnstr(*name, ft_strlen(*name) - 1);
-	ft_putendl(":");
-	free(prt_name);
-}
-
-t_list				*ls_set_parent(t_list *prt, t_list *l_args)
-{
-	char		*prt_path;
-	char		*name;
-
-	prt_path = NULL;
-	if (!(name = ft_strdup(((t_data *)l_args->content)->name)))
-		ls_error(NULL, MEM_ERROR);
-	if (prt)
-	{
-		ls_has_parent(&prt_path, &name, prt);
-	}
-	else if (!(ft_strequ(name, "/")))
-	{
-		free(name);
-		if (!(name = ft_strjoin(name, "/")))
-			ls_error(NULL, MEM_ERROR);
-	}
-	free(((t_data *)l_args->content)->name);
-	if (!(((t_data *)l_args->content)->name = ft_strdup(name)))
-		ls_error(NULL, MEM_ERROR);
-	free(name);
-	free(prt_path);
-	return (l_args);
 }
 
 void				ls_error(const char *path, int error)
@@ -120,4 +73,19 @@ void				ls_add_spaces(int width, int len, int sp)
 	}
 	if (sp == 1)
 		ft_putstr("  ");
+}
+
+void				ft_putcolor(char *str, char *color, char *bg, char *format)
+{
+	if (color != NULL)
+		ft_putstr(color);
+	if (bg != NULL)
+		ft_putstr(bg);
+	if (format != NULL)
+	{
+		if (ft_strstr(format, "BOLD") != 0)
+			ft_putstr(BOLD);
+	}
+	ft_putstr(str);
+	ft_putstr(RESET);
 }

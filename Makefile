@@ -6,34 +6,33 @@
 #    By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/17 11:47:04 by pforciol          #+#    #+#              #
-#    Updated: 2019/09/10 16:33:40 by pforciol         ###   ########.fr        #
+#    Updated: 2019/09/12 16:08:45 by pforciol         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-RED = \033[0;91m
-GREEN = \033[0;32m
-DARK_GREY = \033[0;90m
+RED = \033[91m
+GREEN = \033[32m
+DARK_GREY = \033[90m
 NORMAL = \033[0m
 
 NAME = ft_ls
-CC = @gcc
+CC = gcc
 
 OBJ_DIR = objs/
 
 CFLAGS = -Wall -Wextra -Werror
 
 SRC =		ft_ls.c \
-			ls_args_utils.c \
 			ls_directory.c \
-			ls_display_l_utils.c \
 			ls_display_l.c \
+			ls_display_utils.c \
 			ls_display.c \
 			ls_lst_utils.c \
+			ls_names.c \
 			ls_options.c \
 			ls_process.c \
 			ls_sort.c \
-			ls_utils.c \
-			debug.c
+			ls_utils.c
 			
 SRC_DIR = srcs/
 

@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 11:01:08 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/11 14:48:27 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/12 16:04:47 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,20 @@ static t_list		*ls_process_file(t_list *l_args, t_opt *opt,
 	return (l_args);
 }
 
-int					ls_pre_process(t_list *l_args, t_list *before, t_opt *opt,
+static int			ls_pre_process(t_list *l_args, t_list *before, t_opt *opt,
 										unsigned int *widths)
 {
 	int				file;
+	DIR				*tmp_dir;
 
 	file = 0;
+	tmp_dir = NULL;
 	while (l_args)
 	{
 		if ((S_ISDIR(((t_data *)l_args->content)->stats.st_mode)
-						|| ((((t_data *)l_args->content)->mode == 'l')
-								&& opendir(((t_data *)l_args->content)->name)))
-						&& opt->d == 0)
+					|| ((((t_data *)l_args->content)->mode == 'l')
+					&& (tmp_dir = opendir(((t_data *)l_args->content)->name)) 
+					&& opt->l == 0)) && opt->d == 0)
 			((t_data *)l_args->content)->is_dir = 1;
 		else
 		{
@@ -63,6 +65,8 @@ int					ls_pre_process(t_list *l_args, t_list *before, t_opt *opt,
 			file++;
 		}
 		l_args = l_args->next;
+		if (tmp_dir)
+			closedir(tmp_dir);
 	}
 	return (file);
 }
@@ -77,7 +81,8 @@ void				ls_process(t_list *l_args, t_opt *opt, int ac)
 	before = NULL;
 	start = l_args;
 	file = 0;
-	ls_get_col_widths(l_args, widths, 1);
+	if (opt->l)
+		ls_get_col_widths(l_args, widths, 1);
 	file += ls_pre_process(l_args, before, opt, widths);
 	if (file > 0)
 		ft_putchar('\n');

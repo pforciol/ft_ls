@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ls_args_utils.c                                    :+:      :+:    :+:   */
+/*   ls_display_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 09:38:18 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/11 14:58:27 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/12 16:04:35 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,26 +49,4 @@ void				ls_print_w_color(char *name, mode_t mode)
 		ft_putcolor(name, RED, NULL, NULL);
 	else
 		ft_putstr(name);
-}
-
-t_list				*ls_getarg(char *arg, t_list *l_args, int *v_a)
-{
-	t_data			*data;
-
-	if (!(data = (t_data *)malloc(sizeof(t_data))))
-		ls_error(NULL, MEM_ERROR);
-	if (lstat(arg, &data->stats) != 0)
-	{
-		free(data);
-		ls_error(arg, ERRNO_ERROR);
-	}
-	else
-	{
-		if (!(data->name = ft_strdup(arg)))
-			ls_error(NULL, MEM_ERROR);
-		data->mode = ls_get_mode(data->stats.st_mode);
-		lst_append(&l_args, lst_create(data, sizeof(t_data)));
-		(*v_a)++;
-	}
-	return (l_args);
 }
