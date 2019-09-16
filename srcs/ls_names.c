@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/12 14:37:06 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/12 17:11:38 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/16 13:48:37 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		ls_has_parent(char **prt_path, char **name, t_list *prt)
 									ft_strequ(*prt_path, "/") ? "" : "/")))
 			ls_error(NULL, MEM_ERROR);
 	}
-	ft_putchar('\n');
+	ft_putstr("\n");
 	ft_putnstr(*name, ft_strlen(*name) - 1);
 	ft_putendl(":");
 	free(prt_name);

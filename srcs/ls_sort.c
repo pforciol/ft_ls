@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/22 14:20:46 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/12 16:04:21 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/16 14:54:51 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,27 @@ static int			ls_sort_lexically(t_opt *opt, t_data *first, t_data *second)
 
 static int			ls_sort_by_time(t_opt *opt, t_data *first, t_data *second)
 {
-	if (first->stats.st_mtimespec.tv_sec == second->stats.st_mtimespec.tv_sec)
+	if (first->stat.st_mtimespec.tv_sec == second->stat.st_mtimespec.tv_sec)
 	{
-		if (first->stats.st_mtimespec.tv_nsec ==
-				second->stats.st_mtimespec.tv_nsec)
+		if (first->stat.st_mtimespec.tv_nsec ==
+				second->stat.st_mtimespec.tv_nsec)
 			return (ls_sort_lexically(opt, first, second));
 		if (opt->r == 1)
-			return (first->stats.st_mtimespec.tv_nsec >
-						second->stats.st_mtimespec.tv_nsec);
+			return (first->stat.st_mtimespec.tv_nsec >
+						second->stat.st_mtimespec.tv_nsec);
 		else
-			return (first->stats.st_mtimespec.tv_nsec <
-						second->stats.st_mtimespec.tv_nsec);
+			return (first->stat.st_mtimespec.tv_nsec <
+						second->stat.st_mtimespec.tv_nsec);
 	}
 	if (opt->r == 1)
 	{
-		return (first->stats.st_mtimespec.tv_sec >
-					second->stats.st_mtimespec.tv_sec);
+		return (first->stat.st_mtimespec.tv_sec >
+					second->stat.st_mtimespec.tv_sec);
 	}
 	else
 	{
-		return (first->stats.st_mtimespec.tv_sec <
-					second->stats.st_mtimespec.tv_sec);
+		return (first->stat.st_mtimespec.tv_sec <
+					second->stat.st_mtimespec.tv_sec);
 	}
 	return (0);
 }

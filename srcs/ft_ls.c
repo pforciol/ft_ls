@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/11 09:26:10 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/12 17:09:07 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/16 15:04:47 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_list		*ls_getarg(char *arg, t_list *l_args, int *v_a)
 
 	if (!(data = (t_data *)malloc(sizeof(t_data))))
 		ls_error(NULL, MEM_ERROR);
-	if (lstat(arg, &data->stats) != 0)
+	if (lstat(arg, &data->stat) != 0)
 	{
 		free(data);
 		ls_error(arg, ERRNO_ERROR);
@@ -27,7 +27,7 @@ static t_list		*ls_getarg(char *arg, t_list *l_args, int *v_a)
 	{
 		if (!(data->name = ft_strdup(arg)))
 			ls_error(NULL, MEM_ERROR);
-		data->mode = ls_get_mode(data->stats.st_mode);
+		data->mode = ls_get_mode(data->stat.st_mode);
 		lst_append(&l_args, lst_create(data, sizeof(t_data)));
 		(*v_a)++;
 	}

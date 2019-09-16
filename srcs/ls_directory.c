@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:55:26 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/12 17:09:22 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/16 14:54:50 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static t_list		*ls_getfile(char *parent_name, char *name, t_list *l_args)
 		ls_error(NULL, MEM_ERROR);
 	if (!(data = (t_data *)malloc(sizeof(t_data))))
 		ls_error(NULL, MEM_ERROR);
-	lstat(full_name, &data->stats);
+	lstat(full_name, &data->stat);
 	if (data != NULL)
 	{
 		if (!(data->name = ft_strdup(name)))
 			ls_error(NULL, MEM_ERROR);
-		data->mode = ls_get_mode(data->stats.st_mode);
+		data->mode = ls_get_mode(data->stat.st_mode);
 		lst_append(&l_args, lst_create(data, sizeof(t_data)));
 	}
 	free(full_name);

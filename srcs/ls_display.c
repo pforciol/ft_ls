@@ -6,7 +6,7 @@
 /*   By: pforciol <pforciol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 15:26:06 by pforciol          #+#    #+#             */
-/*   Updated: 2019/09/12 18:08:14 by pforciol         ###   ########.fr       */
+/*   Updated: 2019/09/16 15:03:45 by pforciol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void			ls_print_recursively(t_list *d_entries, t_list *l_args,
 {
 	while (d_entries)
 	{
-		if (S_ISDIR(((t_data *)d_entries->content)->stats.st_mode) &&
+		if (S_ISDIR(((t_data *)d_entries->content)->stat.st_mode) &&
 				!ft_strequ(((t_data *)d_entries->content)->name, ".") &&
 				!ft_strequ(((t_data *)d_entries->content)->name, ".."))
 		{
@@ -37,7 +37,7 @@ static void			ls_print_total(t_list *d_entries)
 	total = 0;
 	while (d_entries)
 	{
-		total += ((t_data *)d_entries->content)->stats.st_blocks;
+		total += ((t_data *)d_entries->content)->stat.st_blocks;
 		d_entries = d_entries->next;
 	}
 	stotal = ft_itoa(total);
@@ -55,21 +55,25 @@ static void			ls_print_d_entries(t_list *d_entries, t_list *l_args,
 	{
 		ls_print_l((t_data *)d_entries->content,
 						(t_data *)l_args->content, widths, opt);
-		ft_putchar('\n');
+		if (d_entries->next)
+			ft_putchar('\n');
 	}
 	else if (opt->one)
 	{
 		ls_print_w_color(((t_data *)d_entries->content)->name,
-			((t_data *)d_entries->content)->stats.st_mode);
-		ft_putchar('\n');
+			((t_data *)d_entries->content)->stat.st_mode);
+		if (d_entries->next)
+			ft_putchar('\n');
 	}
 	else
 	{
 		ls_print_w_color(((t_data *)d_entries->content)->name,
-			((t_data *)d_entries->content)->stats.st_mode);
+			((t_data *)d_entries->content)->stat.st_mode);
 		if (d_entries->next)
 			ft_putstr("    ");
 	}
+	if (d_entries->next == NULL)
+		ft_putchar('\n');
 }
 
 void				ls_print_dir(t_list *parent, t_list *l_args, t_opt *opt)
